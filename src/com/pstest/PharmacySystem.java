@@ -2,17 +2,17 @@ package com.pstest;
 
 import com.pscontroller.LoginController;
 import com.psmodel.LoginModel;
-import com.psview.LoginView;
+import com.psview.PharmacyView;
 
 public class PharmacySystem {
     
     public static void main(String[] args)
     {
-        LoginView loginView = new LoginView();
+        PharmacyView pharmacyView = new PharmacyView();
         LoginModel loginModel = new LoginModel();
         
-        LoginController loginController = new LoginController(loginView,loginModel);     
-        loginView.setVisible(true);
+        LoginController loginController = new LoginController(pharmacyView,loginModel);     
+        pharmacyView.setVisible(true);
        
     }
 }

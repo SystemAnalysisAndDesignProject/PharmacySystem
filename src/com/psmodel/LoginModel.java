@@ -27,4 +27,9 @@ public class LoginModel {
         }
         return false;
     }
+    
+    public DataBaseManagment getDataBase()
+    {
+        return dbm;
+    }
 }

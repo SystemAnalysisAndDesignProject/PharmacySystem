@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class LoginView extends JFrame{
+public class LoginPanel extends JPanel{
     
     private JLabel titleLbl;
     private JLabel usernameLbl;
@@ -16,26 +16,21 @@ public class LoginView extends JFrame{
     private JTextField usernameTxt;
     private JTextField passwordTxt;
     private JButton loginBtn;
-    private final int WIDTH = 800;
-    private final int HEIGHT = 600; 
+    //private final int WIDTH = 800;
+    //private final int HEIGHT = 600; 
     
-    public LoginView()
-    {
-        JPanel loginPanel = new JPanel();
-        
+    public LoginPanel()
+    {        
         //INITIALIZING COMPONENTS
-        titleLbl = new JLabel("Login");
+        titleLbl = new JLabel("Pharmacy System");
         usernameLbl = new JLabel("Username");
         passwordLbl = new JLabel("Password");
         usernameTxt = new JTextField(20);
         passwordTxt = new JTextField(20);
         loginBtn = new JButton("Login");
         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(WIDTH,HEIGHT);
-        
         //SET POSITION
-        titleLbl.setBounds(350,10,100,100);
+        titleLbl.setBounds(350,10,150,100);
         usernameLbl.setBounds(250,150,100,100);
         usernameTxt.setBounds(350,190,150,20);
         passwordLbl.setBounds(250,200,100,100);      
@@ -43,22 +38,17 @@ public class LoginView extends JFrame{
         loginBtn.setBounds(370,300,100,20);
         
         //ADDING TO PANEL
-        loginPanel.add(titleLbl);
-        loginPanel.add(usernameLbl);
-        loginPanel.add(usernameTxt);
-        loginPanel.add(passwordLbl);
-        loginPanel.add(passwordTxt);
-        loginPanel.add(loginBtn);
+        this.add(titleLbl);
+        this.add(usernameLbl);
+        this.add(usernameTxt);
+        this.add(passwordLbl);
+        this.add(passwordTxt);
+        this.add(loginBtn);                
         
-        
-        
-        loginPanel.setLayout(null);
-        //ADDING TO JFRAME
-        this.add(loginPanel);
-        
-    }
+        this.setLayout(null);        
+    } 
     
-    public String getUsername(){
+    public String getUsernameTxt(){
         return usernameTxt.getText();
     }
     
@@ -76,9 +66,8 @@ public class LoginView extends JFrame{
     
     public void clearPanel()
     {
-        this.dispose();
+        usernameTxt.setText("");        
+        passwordTxt.setText("");
     }
-    
-    
     
 }
