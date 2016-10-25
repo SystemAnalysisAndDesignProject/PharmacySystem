@@ -1,2 +1,2 @@
-master,master1,M
-emp,emp1,E
+master,master1,M,true,true,true,true
+emp,emp1,E,true,false,false,false
