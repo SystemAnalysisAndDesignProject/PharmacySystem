@@ -5,7 +5,6 @@ public abstract class User {
     private String password;
     private String role;
     private String name;
-    private String lastName; 
     
     
     public void setUsername(String username){
