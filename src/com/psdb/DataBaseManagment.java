@@ -1,5 +1,6 @@
 package com.psdb;
 
+import com.psmodel.Permission;
 import com.psmodel.PharmacyConstants;
 import com.psmodel.User;
 import com.psmodel.UserFactory;
@@ -29,6 +30,10 @@ public class DataBaseManagment {
                 user.setUsername(tempUser[0]);
                 user.setPassword(tempUser[1]);
                 user.setRole(tempUser[2]);
+                user.setPermission(new Permission(Boolean.parseBoolean(tempUser[3]),
+                                                  Boolean.parseBoolean(tempUser[4]),
+                                                  Boolean.parseBoolean(tempUser[5]),
+                                                  Boolean.parseBoolean(tempUser[6])));
                
                 users.add(user);
             }            

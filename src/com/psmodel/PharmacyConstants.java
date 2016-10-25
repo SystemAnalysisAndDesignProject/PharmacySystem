@@ -2,6 +2,5 @@ package com.psmodel;
 
 public class PharmacyConstants {
     
-    public static final String usersFilePath = "C:\\Users\\paul7_000\\Documents\\NetBeansProjects\\PharmacySystem\\res\\Users.txt";
-    public static final int ss = 1;
+    public static final String usersFilePath = "I:\\Programming\\Java\\PharmacySystem\\res\\Users.txt";
 }

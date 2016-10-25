@@ -2,11 +2,12 @@ package com.psview;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainMenuPanel extends JPanel{
     
+    private JLabel welcomeLbl;
     private JButton modifyBtn;
     private JButton orderProcessBtn;
     private JButton logoutBtn;
@@ -17,11 +18,14 @@ public class MainMenuPanel extends JPanel{
         modifyBtn = new JButton("Modify");
         orderProcessBtn = new JButton("Process Order");
         logoutBtn = new JButton("Logout");
+        welcomeLbl = new JLabel("Welcome ");
         
         //Setting Bounds
+        welcomeLbl.setBounds(350,20,150,20);
         modifyBtn.setBounds(100,250,150,20);
         orderProcessBtn.setBounds(300,250,150,20);
         logoutBtn.setBounds(500,250,150,20);
+        
         
         
         this.setLayout(null);  
@@ -30,6 +34,12 @@ public class MainMenuPanel extends JPanel{
         this.add(modifyBtn);
         this.add(orderProcessBtn);
         this.add(logoutBtn);
+        this.add(welcomeLbl);
+    }
+    
+    public void setWelcomeLbl(String info)
+    {
+        welcomeLbl.setText(info);
     }
     
     public void addModifyListener(ActionListener listenerForModifyBtn){

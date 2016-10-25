@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class LoginModel {
     
     private DataBaseManagment dbm;
+    private User user;
     
     public LoginModel()
     {
@@ -20,7 +21,8 @@ public class LoginModel {
         for(User user : userList)
         {
             if(user.getUsername().equals(username)){
-                if(user.getPassword().equals(password)){
+                if(user.getPassword().equals(password)){                    
+                    this.user = user;
                     return true;
                 }
             }
@@ -28,8 +30,11 @@ public class LoginModel {
         return false;
     }
     
-    public DataBaseManagment getDataBase()
-    {
+    public DataBaseManagment getDataBase(){
         return dbm;
+    }
+    
+    public User getUser(){
+        return user;
     }
 }

@@ -2,7 +2,6 @@ package com.pscontroller;
 
 import com.psmodel.LoginModel;
 import com.psmodel.MainMenuModel;
-import com.psview.MainMenuPanel;
 import com.psview.PharmacyView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +15,7 @@ public class LoginController {
         this.loginView = loginView;
         this.loginModel = loginModel;
 
+        //Add Listeners
         this.loginView.addLoginListener(new LoginListener());
     }   
     
@@ -32,8 +32,13 @@ public class LoginController {
                 if(!userExists)
                 {
                     loginView.displayErrorMessage("Invalid Username or Password");
-                }else{                     
-                    MainMenuModel mainMenuModel = new MainMenuModel(loginModel.getDataBase());                    
+                }else{ 
+                    System.out.println("You have successfully logged in as a " + loginModel.getUser().getRole());
+                    System.out.println("Your Permissions : " + loginModel.getUser().getPermission().getCanModifyCustomer() + " " +
+                                        loginModel.getUser().getPermission().getCanModifyManager() + " " +
+                                        loginModel.getUser().getPermission().getCanModifyEmployee() + " " +
+                                        loginModel.getUser().getPermission().getCanModifyProducts());
+                    MainMenuModel mainMenuModel = new MainMenuModel(loginModel.getDataBase(),loginModel.getUser());                    
                     MainMenuController mainMenuController = new MainMenuController(loginView,mainMenuModel);                  
                 }          
         }

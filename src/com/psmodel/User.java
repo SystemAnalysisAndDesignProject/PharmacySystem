@@ -5,6 +5,8 @@ public abstract class User {
     private String password;
     private String role;
     private String name;
+    private String lastName; 
+    private Permission permission;
     
     
     public void setUsername(String username){
@@ -29,5 +31,13 @@ public abstract class User {
     
     public String getRole(){
         return role;
+    }
+    
+    public void setPermission(Permission permission){
+        this.permission = permission;
+    }
+    
+    public Permission getPermission(){
+        return permission;
     }
 }
