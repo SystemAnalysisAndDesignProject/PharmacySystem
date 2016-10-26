@@ -1,7 +1,9 @@
 package com.psview;
 
+import com.psmodel.product.Drug;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -87,9 +89,9 @@ public class PharmacyView extends JFrame {
         loginPanel.setVisible(true);
         loginPanel.clearPanel();
     }
-    
-    public void displayDrugs(String message){
-        modifyPanel.setTextDrugs(message);
+        
+    public void displayTable(String[] columns, Object [][] drugs){
+        modifyPanel.displayTable(columns,drugs);        
     }
     
     public void displayMainMenuManagerFromModify(){

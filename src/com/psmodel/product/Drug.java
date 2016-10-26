@@ -57,7 +57,10 @@ public class Drug implements IProductItem,IGetInfo{
 
     @Override
     public String getDescription() {
-        return _productID + "\n " + _name + "\n " + _quantity + "\n " + _price;
+        return _productID + " " + _name + " " + _quantity + " " + _price;
     }
+   
+    
+    
     
 }

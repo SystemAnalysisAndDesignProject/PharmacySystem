@@ -1,6 +1,9 @@
 package com.psview;
 
+import com.psmodel.product.Drug;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -8,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 public class ModifyPanel extends JPanel{
     
@@ -18,54 +25,55 @@ public class ModifyPanel extends JPanel{
     private JButton backToMenuBtn;
     private JTextField firstNameTxt;
     private JTextField lastNameTxt;
-    private JLabel productsTxt;
-    //private JTextField nameTxt;
-   // private JTextField nameTxt;
+    private JTable table;
+    private JScrollPane scrollPane;
     
     public ModifyPanel()
     {
-        this.setLayout(null);
+        this.setLayout(null);        
+        //Initializing
         customerBtn = new JButton("Customer");
         managerBtn = new JButton("Manager");
         employeeBtn = new JButton("Employee");
         productBtn = new JButton("Product");
         backToMenuBtn = new JButton("Back To Main Menu");
-        productsTxt = new JLabel();
-
-        
-        productsTxt.setBounds(20,100,600,600);
-
-        
-        customerBtn.setBounds(20, 20, 150, 20);
-        managerBtn.setBounds(200, 20, 150, 20);
-        employeeBtn.setBounds(380, 20, 150, 20);
-        productBtn.setBounds(510, 20, 150, 20);
+        table = new JTable();
+        scrollPane = new JScrollPane(table);        
+      
+        //Setting Position      
+        customerBtn.setBounds(30, 20, 150, 20);
+        managerBtn.setBounds(210, 20, 150, 20);
+        employeeBtn.setBounds(390, 20, 150, 20);
+        productBtn.setBounds(570, 20, 150, 20);
         backToMenuBtn.setBounds(510, 500, 150, 20);
-         productsTxt.setVisible(false);
-        
+        scrollPane.setBounds(10, 250, 200, 300);
+
+        //Adding to components to Panel
         this.add(customerBtn);
         this.add(managerBtn);
         this.add(employeeBtn);
         this.add(productBtn);
-        this.add(backToMenuBtn);  
-        this.add(productsTxt);
-               
-               
-        
+        this.add(backToMenuBtn);      
+        this.add(scrollPane);
+                
+        //Visibility
+        scrollPane.setVisible(false);
     }
     
     public void setVisibilityForEmployee(){
         managerBtn.setVisible(false);
         employeeBtn.setVisible(false);
         productBtn.setVisible(false);        
-    }
-    
-    
-    public void setTextDrugs(String message){
-        productsTxt.setText(message);
-        productsTxt.setVisible(true);
-    }
-   
+    }   
+
+    public void displayTable(String [] columns,Object[][] drugs){
+        table = new JTable(drugs,columns);
+        table.setEnabled(false);
+        scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(30,250,700,100);
+        this.add(scrollPane);
+        table.setVisible(true);        
+    }   
     
     public void setVisibilityForCustomerDetails(boolean vis){
         firstNameTxt = new JTextField(20);

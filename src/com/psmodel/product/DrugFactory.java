@@ -11,6 +11,8 @@ package com.psmodel.product;
  */
 public class DrugFactory {
     
+    
+    
     public Drug makeDrug(int productID, String name, int quantity, double price, boolean checkRequiresPerscription){
         if(name.equals("Aspirin")){
             return new Asprine(productID,name,quantity,price,checkRequiresPerscription);

@@ -2,6 +2,7 @@ package com.psdb;
 
 import com.psmodel.user.Permission;
 import com.psmodel.PharmacyConstants;
+import com.psmodel.customer.Customer;
 import com.psmodel.user.User;
 import com.psmodel.user.UserFactory;
 import com.psmodel.product.Drug;
@@ -15,10 +16,13 @@ public class DataBaseManagment {
     
     private ArrayList<User> users;
     private ArrayList<Drug> drugs;
+    private ArrayList<Customer> customers;
+    
     
     public DataBaseManagment(){
         readUsers();
         readDrugs();
+        readCustomers();
     }
     
     private void readUsers(){ 
@@ -78,11 +82,42 @@ public class DataBaseManagment {
     
     }
     
+    private void readCustomers(){
+        BufferedReader br = null;        
+        try{
+            String currentLine;
+            customers = new ArrayList<Customer>();
+            
+            br = new BufferedReader(new FileReader(PharmacyConstants.customersFilePath));
+            
+            while((currentLine = br.readLine()) != null){
+                
+                String [] tempCustomer = currentLine.split(",");
+                Customer customer = new Customer(Integer.parseInt(tempCustomer[0]),tempCustomer[1],tempCustomer[2],
+                                                tempCustomer[3],
+                                                Integer.parseInt(tempCustomer[4]),
+                                                Boolean.parseBoolean(tempCustomer[5]),
+                                                Boolean.parseBoolean(tempCustomer[6]));
+                
+                System.out.println(customer.getCustomerID());
+                
+               
+                customers.add(customer);
+            }            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }   
+    
     public ArrayList<User> getUsers(){     
         return users;
     }
     
     public ArrayList<Drug> getDrugs(){
         return drugs;
+    }
+    
+    public ArrayList<Customer> getCustomers(){
+        return customers;
     }
 }
