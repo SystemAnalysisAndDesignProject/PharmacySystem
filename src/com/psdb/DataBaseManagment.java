@@ -4,6 +4,8 @@ import com.psmodel.Permission;
 import com.psmodel.PharmacyConstants;
 import com.psmodel.User;
 import com.psmodel.UserFactory;
+import com.psmodel.product.Drug;
+import com.psmodel.product.DrugFactory;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,8 +14,14 @@ import java.util.ArrayList;
 public class DataBaseManagment {
     
     private ArrayList<User> users;
+    private ArrayList<Drug> drugs;
     
-    public void readUsers(){ 
+    public DataBaseManagment(){
+        readUsers();
+        readDrugs();
+    }
+    
+    private void readUsers(){ 
         BufferedReader br = null;        
         try{
             String currentLine;
@@ -42,7 +50,39 @@ public class DataBaseManagment {
         }
     }
     
+    private void readDrugs(){
+        
+        BufferedReader br = null;        
+        try{
+            String currentLine;
+            drugs = new ArrayList<Drug>();
+            
+            br = new BufferedReader(new FileReader(PharmacyConstants.drugsFilePath));
+            
+            while((currentLine = br.readLine()) != null){
+                
+                String [] tempDrug = currentLine.split(",");
+                DrugFactory drugFactory = new DrugFactory();
+                
+                Drug drug = drugFactory.makeDrug(Integer.parseInt(tempDrug[0]),tempDrug[1],
+                                          Integer.parseInt(tempDrug[2]),Double.parseDouble(tempDrug[3]),
+                                          Boolean.parseBoolean(tempDrug[4]));
+                
+                System.out.println(drug.getDescription());
+               
+                drugs.add(drug);
+            }            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    
+    }
+    
     public ArrayList<User> getUsers(){     
         return users;
+    }
+    
+    public ArrayList<Drug> getDrugs(){
+        return drugs;
     }
 }

@@ -11,7 +11,6 @@ public class LoginModel {
     public LoginModel()
     {
             dbm = new DataBaseManagment();
-            dbm.readUsers();
     }
     
     public boolean Validate(String username, String password){

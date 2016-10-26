@@ -1,9 +1,11 @@
 package com.pscontroller;
 
 import com.psmodel.ModifyModel;
+import com.psmodel.product.Drug;
 import com.psview.PharmacyView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ModifyController {
     
@@ -58,7 +60,16 @@ public class ModifyController {
     class ProductListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            System.out.println("product clicked");
+            ArrayList<Drug> drugs = modifyModel.getDrugs();
+            
+            String message = "";
+            
+            for(Drug drug : drugs){
+                message += drug.getDescription();
+            }
+            
+            modifyView.displayDrugs(message);
+            
         }             
     }
     

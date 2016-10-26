@@ -88,6 +88,10 @@ public class PharmacyView extends JFrame {
         loginPanel.clearPanel();
     }
     
+    public void displayDrugs(String message){
+        modifyPanel.setTextDrugs(message);
+    }
+    
     public void displayMainMenuManagerFromModify(){
         modifyPanel.setVisible(false);
         this.add(mainMenuPanel);        
@@ -147,6 +151,7 @@ public class PharmacyView extends JFrame {
     public void addBackToMenuListener(ActionListener listenerForBackToMenuBtn){
         modifyPanel.addBackToMenuListener(listenerForBackToMenuBtn);
     }
+
     
     
 }
