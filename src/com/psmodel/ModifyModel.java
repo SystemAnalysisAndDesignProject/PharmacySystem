@@ -1,5 +1,6 @@
 package com.psmodel;
 
+import com.psmodel.user.User;
 import com.psdb.DataBaseManagment;
 import com.psmodel.product.Drug;
 import java.util.ArrayList;

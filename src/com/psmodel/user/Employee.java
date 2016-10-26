@@ -1,4 +1,4 @@
-package com.psmodel;
+package com.psmodel.user;
 
 public class Employee extends User{
     

@@ -1,9 +1,9 @@
 package com.psdb;
 
-import com.psmodel.Permission;
+import com.psmodel.user.Permission;
 import com.psmodel.PharmacyConstants;
-import com.psmodel.User;
-import com.psmodel.UserFactory;
+import com.psmodel.user.User;
+import com.psmodel.user.UserFactory;
 import com.psmodel.product.Drug;
 import com.psmodel.product.DrugFactory;
 import java.io.BufferedReader;
