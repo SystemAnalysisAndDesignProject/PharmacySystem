@@ -7,6 +7,7 @@ import com.psmodel.user.User;
 import com.psmodel.user.UserFactory;
 import com.psmodel.product.Drug;
 import com.psmodel.product.DrugFactory;
+import com.psmodel.sales.SalesDetails;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,12 +18,14 @@ public class DataBaseManagment {
     private ArrayList<User> users;
     private ArrayList<Drug> drugs;
     private ArrayList<Customer> customers;
+    private int [] salesDetailsArray;
     
     
     public DataBaseManagment(){
         readUsers();
         readDrugs();
         readCustomers();
+        readSalesDetails();
     }
     
     private void readUsers(){ 
@@ -109,6 +112,32 @@ public class DataBaseManagment {
         }
     }   
     
+    private void readSalesDetails(){ 
+        BufferedReader br = null;        
+        SalesDetails salesDetails = new SalesDetails();
+        try{
+            String currentLine;
+            salesDetailsArray = new int[3];            
+            br = new BufferedReader(new FileReader(PharmacyConstants.salesDetailsFilePath));
+            
+            while((currentLine = br.readLine()) != null){
+                
+                String [] tempSalesDetails = currentLine.split(",");
+                for(int i = 0; i < tempSalesDetails.length; i++)
+                {
+                    salesDetailsArray[i] = Integer.parseInt(tempSalesDetails[i]);
+                }
+         
+            }
+            
+            salesDetails.setMedicalCardSales(salesDetailsArray[0]);
+            salesDetails.setDrugSchemeSales(salesDetailsArray[1]);
+            salesDetails.setRegularSales(salesDetailsArray[2]);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     public ArrayList<User> getUsers(){     
         return users;
     }
@@ -119,5 +148,9 @@ public class DataBaseManagment {
     
     public ArrayList<Customer> getCustomers(){
         return customers;
+    }
+    
+    public int [] getSalesDetailsArray(){
+        return salesDetailsArray;
     }
 }

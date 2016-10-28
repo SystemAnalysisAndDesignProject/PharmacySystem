@@ -12,6 +12,7 @@ public class MainMenuPanel extends JPanel{
     private JButton modifyBtn;
     private JButton orderProcessBtn;
     private JButton logoutBtn;
+    private JButton salesReportBtn;
     
     
     public MainMenuPanel()
@@ -19,6 +20,7 @@ public class MainMenuPanel extends JPanel{
         //Initializing
         modifyBtn = new JButton("Modify");
         orderProcessBtn = new JButton("Process Order");
+        salesReportBtn = new JButton("Sales Reports");
         logoutBtn = new JButton("Logout");
         welcomeLbl = new JLabel("Welcome ");
         
@@ -28,6 +30,7 @@ public class MainMenuPanel extends JPanel{
         modifyBtn.setBounds(100,250,150,20);
         orderProcessBtn.setBounds(300,250,150,20);
         logoutBtn.setBounds(500,250,150,20);
+        salesReportBtn.setBounds(100,300,150,20);
        
         
         
@@ -39,7 +42,13 @@ public class MainMenuPanel extends JPanel{
         this.add(orderProcessBtn);
         this.add(logoutBtn);
         this.add(welcomeLbl);
+        this.add(salesReportBtn);
+        salesReportBtn.setVisible(false);
       
+    }
+    
+    public void salesReportBtnVisibility(boolean vis){
+        salesReportBtn.setVisible(vis);
     }
     
     public void setWelcomeLbl(String info)
@@ -57,6 +66,10 @@ public class MainMenuPanel extends JPanel{
     
     public void addLogoutListener(ActionListener listenerForLogoutBtn){
         logoutBtn.addActionListener(listenerForLogoutBtn);
+    }
+    
+    public void addSalesReportsListener(ActionListener listenerForSalesReportBtn){
+        salesReportBtn.addActionListener(listenerForSalesReportBtn);
     }
    
 }
