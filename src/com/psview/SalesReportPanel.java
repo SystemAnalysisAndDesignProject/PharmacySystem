@@ -1,6 +1,7 @@
 package com.psview;
 
 import com.psmodel.PharmacyConstants;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,5 +34,9 @@ public class SalesReportPanel extends JPanel{
         this.add(pieLabel);
         this.add(barLabel);
         this.add(backToMainMenuBtn);
+    }
+    
+    public void addBackToMainMenuListener(ActionListener listenerForBackToMainMenuBtn){
+        backToMainMenuBtn.addActionListener(listenerForBackToMainMenuBtn);
     }
 }

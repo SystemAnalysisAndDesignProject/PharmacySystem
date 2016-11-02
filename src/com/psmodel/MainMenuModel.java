@@ -3,7 +3,6 @@ package com.psmodel;
 import com.psmodel.user.User;
 import com.psdb.DataBaseManagment;
 import com.psmodel.sales.SalesBarChart;
-import com.psmodel.sales.SalesChart;
 import com.psmodel.sales.SalesDetails;
 import com.psmodel.sales.SalesPieChart;
 

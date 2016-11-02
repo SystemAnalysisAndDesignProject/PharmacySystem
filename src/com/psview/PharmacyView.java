@@ -112,6 +112,14 @@ public class PharmacyView extends JFrame {
         mainMenuPanel.setWelcomeLbl("Welcome Employee");
     }
     
+    public void displayMainMenuManagerFromSalesReports(){
+        salesReportPanel.setVisible(false);
+        this.add(mainMenuPanel);        
+        mainMenuPanel.setVisible(true);
+        mainMenuPanel.setBackground(Color.red);
+        mainMenuPanel.setWelcomeLbl("Welcome Manager");
+    }
+    
     //Modify Panel
     
     public void displayModifyManager(){
@@ -167,5 +175,8 @@ public class PharmacyView extends JFrame {
     public void addSalesReportsListener(ActionListener listenerForSalesReportBtn){
         mainMenuPanel.addSalesReportsListener(listenerForSalesReportBtn);
     }
-
+    
+    public void addBackToMainMenuFromSalesReportsListener(ActionListener listenerForBackToMenuBtn){
+        salesReportPanel.addBackToMainMenuListener(listenerForBackToMenuBtn);
+    }
 }

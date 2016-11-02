@@ -15,7 +15,7 @@ public class MainMenuController {
     
     private PharmacyView mainMenuView;
     private MainMenuModel mainMenuModel;
-    
+    //private SalesReportModel salesReportModel;
     
     public MainMenuController(PharmacyView mainMenuView, MainMenuModel mainMenuModel){
         this.mainMenuView = mainMenuView;
@@ -24,6 +24,7 @@ public class MainMenuController {
         if(this.mainMenuModel.getUser().getRole().equals("M"))
         {
             this.mainMenuView.displayMainMenuManager();
+            //salesReportModel.initializeSubjectsAndObservers();
         }else{
             this.mainMenuView.displayMainMenuEmployee();
         }       
