@@ -51,4 +51,7 @@ public class ModifyModel {
          return columns;
      }
     
+      public void getArrayForAddButton(){
+         dbm.writeToCustomerArray();
+     }
 }

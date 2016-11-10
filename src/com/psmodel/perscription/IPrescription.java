@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public interface IPrescription {
         public String getCustomerName();
         public String getGPName();
-        public ArrayList<Drug> getItems();
+        public String getItems();
         public int getPrescriptionID();    
 }
 

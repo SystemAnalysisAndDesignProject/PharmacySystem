@@ -7,18 +7,19 @@ package com.psmodel.perscription;
 
 import com.psmodel.product.Drug;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Prescription implements IPrescription{
     private String _customerName;
     private String _gpName;
-    private ArrayList<Drug> _items;
+    private String  _items;
     private int _prescriptionID;
     
-    public Prescription(String name,String gpName, ArrayList<Drug> items, int prescriptionID){
+    public Prescription(String name,String gpName, String  items, int prescriptionID){
         _customerName = name;
         _gpName = gpName;
         _prescriptionID = prescriptionID;
-        _items.equals(items);
+        _items = items;
         
     }
     
@@ -34,8 +35,12 @@ public class Prescription implements IPrescription{
         return _prescriptionID;
     }
     
-    public ArrayList<Drug> getItems() {
+    public String getItems() {
         return _items;
+    }
+
+    public String getDescription() {
+        return "Customer Name " + _customerName + " GP Name " + _gpName + "items " + _items + " Prescription ID " + _prescriptionID;
     }
     
 }

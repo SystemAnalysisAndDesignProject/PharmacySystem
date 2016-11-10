@@ -1,5 +1,6 @@
 package com.psmodel.sales;
 
+import com.psdb.DataBaseManagment;
 import java.util.ArrayList;
 
 public class SalesDetails implements ISubject
@@ -10,7 +11,7 @@ public class SalesDetails implements ISubject
   }
   
   // A Collection to keep track of all Registered Observers
-  ArrayList <IObserver>observers = new ArrayList<>();
+  ArrayList observers = new ArrayList();
 
   // Stores latest stock quote (example is purposely simplistic)
   private int medicalCardSales = 0;
@@ -32,13 +33,11 @@ public class SalesDetails implements ISubject
     regularSales = x;
   }
   
-  @Override
   public void register(IObserver o)
   {
     observers.add(o);
   }
 
-  @Override
   public void unregister(IObserver o)
   {
     int i = observers.indexOf(o);

@@ -3,13 +3,17 @@ package com.psdb;
 import com.psmodel.user.Permission;
 import com.psmodel.PharmacyConstants;
 import com.psmodel.customer.Customer;
+import com.psmodel.perscription.Prescription;
+import com.psmodel.perscription.PrescriptionFactory;
 import com.psmodel.user.User;
 import com.psmodel.user.UserFactory;
 import com.psmodel.product.Drug;
 import com.psmodel.product.DrugFactory;
 import com.psmodel.sales.SalesDetails;
+import com.psview.ModifyPanel;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,14 +22,45 @@ public class DataBaseManagment {
     private ArrayList<User> users;
     private ArrayList<Drug> drugs;
     private ArrayList<Customer> customers;
+    private ArrayList<Prescription> prescriptions; 
     private int [] salesDetailsArray;
-    
+    private ModifyPanel modifyPanel;
     
     public DataBaseManagment(){
         readUsers();
         readDrugs();
         readCustomers();
         readSalesDetails();
+        readPrescriptions();
+    }
+    
+    private void readPrescriptions(){
+        BufferedReader br = null;        
+        try{
+            String currentLine;
+            prescriptions = new ArrayList<Prescription>();
+            drugs = new ArrayList<Drug>();
+            br = new BufferedReader(new FileReader(PharmacyConstants.prescriptionFilePath));
+            
+            while((currentLine = br.readLine()) != null){
+                
+                String [] tempPrescription = currentLine.split(",");
+                String pres = tempPrescription[2];
+                String name = tempPrescription[0];
+                String gpName = tempPrescription[1];
+                int prescriptionID = Integer.parseInt(tempPrescription[3]);
+                
+                        
+                PrescriptionFactory prescriptionFactory = new PrescriptionFactory();
+                
+                Prescription prescription = PrescriptionFactory.makePrescription(name,gpName,pres,prescriptionID);
+                
+                System.out.println(prescription.getDescription());
+               prescriptions.add(prescription);
+            }            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     
     private void readUsers(){ 
@@ -138,6 +173,38 @@ public class DataBaseManagment {
         }
     }
     
+    ////////////////
+    public void writeToCustomerArray(){ 
+    try{
+    String fileAdd = modifyPanel.addTextFieldToFile();
+    String[] array = fileAdd.split(",");
+    System.out.println("a");
+    FileWriter fw = new FileWriter(PharmacyConstants.customersFilePath); //the true will append the new data
+    Customer customer = new Customer(Integer.parseInt(array[0]),array[1],array[2],array[3],
+                                                Integer.parseInt(array[4]),
+                                                Boolean.parseBoolean(array[5]),
+                                                Boolean.parseBoolean(array[6]));
+    customers.add(customer);
+    System.out.println("b");
+    for(int i = 0; i < customers.size(); i++)
+        {
+            fw.write(customers.get(i).getCustomerID() + "," +
+                    customers.get(i).getCustomerName() + "," +
+                    customers.get(i).getDateOfBirth() + "," +
+                    customers.get(i).getAddress() + "," + 
+                    customers.get(i).getContactNumber() + "," +
+                    customers.get(i).getMedical() + "," +
+                    customers.get(i).getDrug());
+         
+        }
+    }
+    catch(IOException e)
+        {
+            e.printStackTrace();
+        }  
+    }
+    ///////////
+    
     public ArrayList<User> getUsers(){     
         return users;
     }
@@ -152,5 +219,9 @@ public class DataBaseManagment {
     
     public int [] getSalesDetailsArray(){
         return salesDetailsArray;
+    }
+    
+    public ArrayList<Prescription> getPrescriptions(){
+        return prescriptions;
     }
 }

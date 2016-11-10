@@ -2,11 +2,12 @@ package com.psmodel;
 
 import com.psdb.DataBaseManagment;
 import com.psmodel.sales.SalesBarChart;
+import com.psmodel.sales.SalesChart;
 import com.psmodel.sales.SalesDetails;
 import com.psmodel.sales.SalesPieChart;
 
 public class SalesReportModel {
-    
+
     private final DataBaseManagment dbm;
     
     public SalesReportModel(DataBaseManagment dbm){
@@ -26,6 +27,7 @@ public class SalesReportModel {
         // Initialize Gadgets..Note the subject being passed in Constructor
         SalesBarChart salesBarChart = new SalesBarChart(salesDetails);
         SalesPieChart salesPieChart =  new SalesPieChart(salesDetails);
+        SalesChart salesChart = new SalesChart(salesDetails);
 
         
         salesDetails.setMedicalCardSales(medicalCardSales);

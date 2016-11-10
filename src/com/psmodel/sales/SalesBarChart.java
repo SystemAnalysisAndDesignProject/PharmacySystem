@@ -40,16 +40,16 @@ public class SalesBarChart implements IObserver
     public void createBarChartImage(int x, int y, int z) throws IOException
     {
 
-      final String perscription = "involving Perscription";
-      final String drugScheme = "involving Drug Scheme";
-      final String regular = "Regular";
+      final String perscription = "Sales involving Perscription";
+      final String drugScheme = "Sales involving Drug Scheme";
+      final String regular = "Regular Sales";
       final String sales = "Sales";
 
       final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
 
-      dataset.addValue( x , drugScheme , sales );
-      dataset.addValue( y , regular , sales );
-      dataset.addValue( z , perscription , sales );
+      dataset.addValue( x , perscription , sales );
+      dataset.addValue( y , drugScheme , sales );
+      dataset.addValue( z , regular , sales );
       JFreeChart barChart = ChartFactory.createBarChart(
          "Sales Report", 
          "Category", "Number of Sales", 

@@ -3,7 +3,10 @@ package com.pscontroller;
 
 import com.psmodel.MainMenuModel;
 import com.psmodel.ModifyModel;
+import com.psmodel.OrderModel;
 import com.psmodel.SalesReportModel;
+import com.psmodel.customer.Customer;
+import com.psmodel.perscription.Prescription;
 import com.psview.PharmacyView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +18,8 @@ public class MainMenuController {
     
     private PharmacyView mainMenuView;
     private MainMenuModel mainMenuModel;
-    //private SalesReportModel salesReportModel;
+    private Prescription prescription;
+    
     
     public MainMenuController(PharmacyView mainMenuView, MainMenuModel mainMenuModel){
         this.mainMenuView = mainMenuView;
@@ -24,7 +28,6 @@ public class MainMenuController {
         if(this.mainMenuModel.getUser().getRole().equals("M"))
         {
             this.mainMenuView.displayMainMenuManager();
-            //salesReportModel.initializeSubjectsAndObservers();
         }else{
             this.mainMenuView.displayMainMenuEmployee();
         }       
@@ -39,7 +42,7 @@ public class MainMenuController {
         @Override
         public void actionPerformed(ActionEvent e){
             ModifyModel modifyModel = new ModifyModel(mainMenuModel.getDataBase(),mainMenuModel.getUser());                    
-            ModifyController mainMenuController = new ModifyController(mainMenuView,modifyModel);    
+            ModifyController mainMenuController = new ModifyController(mainMenuView,modifyModel);   
         }             
     }
     
@@ -47,6 +50,11 @@ public class MainMenuController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("order process clicked");
+            OrderModel orderModel = new OrderModel(mainMenuModel.getDataBase(),mainMenuModel.getUser());
+            OrderController control = new OrderController(mainMenuView, orderModel);
+            //mainMenuView.displayOrderPanel();
+          // ModifyController control = new ModifyController(mainMenuView, model);
+            
         }        
     } 
     

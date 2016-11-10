@@ -17,7 +17,8 @@ public class Drug implements IProductItem,IGetInfo{
     private double _price;
     private boolean _lowQuantity;
     private boolean _checkRequiresPerscription;
-    
+ 
+     
     public Drug(int productID, String name, int quantity, double price, boolean checkRequiresPerscription){
         _productID = productID;
         _name = name;
@@ -26,6 +27,7 @@ public class Drug implements IProductItem,IGetInfo{
         _lowQuantity = false;
         _checkRequiresPerscription = checkRequiresPerscription;
     }
+   
     
     @Override
     public int getProductID() {
@@ -60,7 +62,8 @@ public class Drug implements IProductItem,IGetInfo{
         return _productID + " " + _name + " " + _quantity + " " + _price;
     }
    
-    
-    
-    
+    public boolean checkRequiresPerscription(){
+        return _checkRequiresPerscription;
+    }
+
 }

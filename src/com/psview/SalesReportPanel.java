@@ -35,7 +35,6 @@ public class SalesReportPanel extends JPanel{
         this.add(barLabel);
         this.add(backToMainMenuBtn);
     }
-    
     public void addBackToMainMenuListener(ActionListener listenerForBackToMainMenuBtn){
         backToMainMenuBtn.addActionListener(listenerForBackToMainMenuBtn);
     }

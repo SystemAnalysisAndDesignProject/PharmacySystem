@@ -1,6 +1,7 @@
 package com.pscontroller;
 
 import com.psmodel.ModifyModel;
+import com.psdb.DataBaseManagment;
 import com.psmodel.customer.Customer;
 import com.psmodel.product.Drug;
 import com.psmodel.user.User;
@@ -8,6 +9,7 @@ import com.psview.PharmacyView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+//////////////////////
 
 public class ModifyController {
     
@@ -29,7 +31,22 @@ public class ModifyController {
         this.modifyView.addManagerListener(new ManagerListener());
         this.modifyView.addEmployeeListener(new EmployeeListener());
         this.modifyView.addProductListener(new ProductListener());
-        this.modifyView.addBackToMenuListener(new BackToMainMenuListener());             
+        this.modifyView.addBackToMenuListener(new BackToMenuListener());   
+        
+        this.modifyView.addAddListener(new AddListener());
+        this.modifyView.addDeleteListener1(new DeleteListener1());
+        this.modifyView.addUpdateListener(new UpdateListener());
+        this.modifyView.addAddListenerForEmployee(new AddListenerForEmployee());
+        this.modifyView.addDeleteListenerForEmployee(new DeleteListenerForEmployee());
+        this.modifyView.addUpdateListenerForEmployee(new UpdateListenerForEmployee());
+        
+        this.modifyView.addTextFieldListener(new addTextField());
+        this.modifyView.deleteTextFieldListener(new deleteTextField());
+        this.modifyView.updateTextFieldListener(new updateTextField());
+        this.modifyView.employeeAddTextFieldListener(new employeeAddTextField());
+        this.modifyView.employeeDeleteTextFieldListener(new employeeDeleteTextField());
+        this.modifyView.employeeUpdateTextFieldListener(new employeeUpdateTextField());
+        
     }
     
     class CustomerListener implements ActionListener{
@@ -62,7 +79,9 @@ public class ModifyController {
                 
             }                     
             modifyView.displayTable(columns,customerArray);
-                
+            modifyView.UpdateButtons();
+            modifyView.dontShowJLabel();
+            modifyView.dontShowEmployeeUpdateButtons();     
 
             
         }             
@@ -72,6 +91,8 @@ public class ModifyController {
         @Override
         public void actionPerformed(ActionEvent e){
             System.out.println("manager clicked");
+            modifyView.DontShowUpdateButtonsForManager();
+            modifyView.dontShowEmployeeUpdateButtons();
         }             
     }
     
@@ -111,6 +132,12 @@ public class ModifyController {
                 
             }                     
             modifyView.displayTable(columns,usersArray);
+            modifyView.employeeUpdateButtons();
+            modifyView.dontShowDeleteOptions();
+            modifyView.dontShowAddOptions();
+            modifyView.dontShowUpdateOptions();
+            modifyView.UButtonInvisible();
+            modifyView.dontShowJLabel();
         }             
     }
     
@@ -136,7 +163,75 @@ public class ModifyController {
                 
             }                     
             modifyView.displayTable(columns,drugsArray);
-            
+            modifyView.dontShowButtonsForProduct();
+            modifyView.dontShowEmployeeUpdateButtons();
+        }             
+    }
+    
+    class BackToMenuListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("back to main menu clicked");
+            if(modifyModel.getUser().getRole().equals("M")){
+                modifyView.displayMainMenuManagerFromModify();
+            }else{
+                modifyView.displayMainMenuEmployeeFromModify();
+            }
+        }             
+    }
+    
+    class AddListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+            System.out.println("add button clicked");
+           modifyView.addOptionsForCustomer();
+           modifyView.dontShowDeleteOptions();
+           modifyView.dontShowUpdateOptions();
+        }
+    }
+    
+    class DeleteListener1 implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("delete button clicked");
+            modifyView.dontShowAddOptions();
+            modifyView.dontShowUpdateOptions();
+            modifyView.deleteOptionsForCustomer();
+        }
+    }
+    
+    class UpdateListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("update button clicked");
+            modifyView.dontShowAddOptions();
+            modifyView.dontShowUpdateOptions();
+            modifyView.updateOptionsForCustomer();
+        }
+    }
+    
+    class AddListenerForEmployee implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("employee add clicked");
+            modifyView.addOptionsForEmployee();
+        }             
+    }
+    
+    class DeleteListenerForEmployee implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("employee delete clicked");
+            modifyView.deleteOptionsForEmployee();
+        }             
+    }
+    
+    class UpdateListenerForEmployee implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("employee update clicked");
+            modifyView.updateOptionsForEmployee();
         }             
     }
     
@@ -150,6 +245,55 @@ public class ModifyController {
                 modifyView.displayMainMenuEmployeeFromModify();
             }
         }             
+    }
+    
+    class addTextField implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Text Field - Entry added to customer table");
+            System.out.println("d");
+            //modifyView.TextFieldToFile();
+            
+            System.out.println("e");
+            //modifyModel.getArrayForAddButton();
+            //dbm.writeToCustomerArray();
+            System.out.println("f");
+        }
+    } 
+    
+    class deleteTextField implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Text Field - Entry deleted from customer table");    
+        }
+    }
+    
+    class updateTextField implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Text Field - Entry updated into customer table");    
+        }
+    }
+    
+    class employeeAddTextField implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Text Field - Entry added to employee table");    
+        }
+    }
+    
+    class employeeDeleteTextField implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Text Field - Entry deleted from employee table");    
+        }
+    }
+    
+    class employeeUpdateTextField implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("Text Field - Entry updated to employee table");    
+        }
     }
     
 }
