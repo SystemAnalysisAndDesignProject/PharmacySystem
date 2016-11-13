@@ -4,7 +4,6 @@ import com.psmodel.user.Permission;
 import com.psmodel.PharmacyConstants;
 import com.psmodel.customer.Customer;
 import com.psmodel.perscription.Prescription;
-import com.psmodel.perscription.PrescriptionFactory;
 import com.psmodel.user.User;
 import com.psmodel.user.UserFactory;
 import com.psmodel.product.Drug;
@@ -12,6 +11,7 @@ import com.psmodel.product.DrugFactory;
 import com.psmodel.sales.SalesDetails;
 import com.psview.ModifyPanel;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,15 +45,13 @@ public class DataBaseManagment {
             while((currentLine = br.readLine()) != null){
                 
                 String [] tempPrescription = currentLine.split(",");
+              
                 String pres = tempPrescription[2];
                 String name = tempPrescription[0];
                 String gpName = tempPrescription[1];
                 int prescriptionID = Integer.parseInt(tempPrescription[3]);
                 
-                        
-                PrescriptionFactory prescriptionFactory = new PrescriptionFactory();
-                
-                Prescription prescription = PrescriptionFactory.makePrescription(name,gpName,pres,prescriptionID);
+                Prescription prescription = new Prescription(name,gpName,pres,prescriptionID);
                 
                 System.out.println(prescription.getDescription());
                prescriptions.add(prescription);
@@ -120,6 +118,20 @@ public class DataBaseManagment {
     
     }
     
+    public void updateDrugsFile(ArrayList<Drug> drugs) throws IOException{
+        BufferedWriter writer = new BufferedWriter(new FileWriter(PharmacyConstants.drugsFilePath));
+        String line ="";
+        
+        for(int i = 0; i < drugs.size(); i++){
+            line = drugs.get(i).getProductID() + "," + drugs.get(i).getName() + "," + drugs.get(i).getQuantity()
+                    + "," + drugs.get(i).getPrice() + "," + drugs.get(i).checkRequiresPerscription();
+            writer.write(line);
+            writer.newLine();
+        }
+        
+    writer.close();
+}
+    
     private void readCustomers(){
         BufferedReader br = null;        
         try{
@@ -173,17 +185,18 @@ public class DataBaseManagment {
         }
     }
     
-    ////////////////
-    public void writeToCustomerArray(){ 
+    //////////////////////////////////////////////
+    public void writeToCustomerArray(String something){ 
     try{
-    String fileAdd = modifyPanel.addTextFieldToFile();
+    String fileAdd = something;
     String[] array = fileAdd.split(",");
-    System.out.println("a");
+    System.out.println("a");    
     FileWriter fw = new FileWriter(PharmacyConstants.customersFilePath); //the true will append the new data
     Customer customer = new Customer(Integer.parseInt(array[0]),array[1],array[2],array[3],
                                                 Integer.parseInt(array[4]),
                                                 Boolean.parseBoolean(array[5]),
                                                 Boolean.parseBoolean(array[6]));
+    System.out.println("GOOD");
     customers.add(customer);
     System.out.println("b");
     for(int i = 0; i < customers.size(); i++)
@@ -197,19 +210,102 @@ public class DataBaseManagment {
                     customers.get(i).getDrug());
          
         }
+    fw.close();
     }
     catch(IOException e)
         {
             e.printStackTrace();
         }  
+    
     }
-    ///////////
+ 
+    public void updateEmployeeTable(String textField){ 
+    try{
+    String fileAdd = textField;
+    String[] employeeArray = fileAdd.split(",");
+    FileWriter fileWriter = new FileWriter(PharmacyConstants.usersFilePath); //the true will append the new data
+    UserFactory userFactory = new UserFactory();
+    User employees = userFactory.makeUser(employeeArray[2]);
+                        employees.setUsername(employeeArray[0]);
+                        employees.setPassword(employeeArray[1]);
+                        employees.setRole(employeeArray[2]);
+                        employees.setPermission(new Permission(Boolean.parseBoolean(employeeArray[3]),
+                                                                Boolean.parseBoolean(employeeArray[4]),
+                                                                Boolean.parseBoolean(employeeArray[5]),
+                                                                Boolean.parseBoolean(employeeArray[6])));
+               
+    users.add(employees);
+    for(int i = 0; i < users.size(); i++)
+        {
+            
+            fileWriter.write(users.get(i).getUsername() + "," +
+                    users.get(i).getPassword() + "," +
+                    users.get(i).getRole() + "," +
+                    users.get(i).getPermission().getCanModifyCustomer() + "," + 
+                    users.get(i).getPermission().getCanModifyEmployee() + "," +
+                    users.get(i).getPermission().getCanModifyProducts() + "," +
+                    users.get(i).getPermission().getCanModifyProducts() + System.lineSeparator());
+         
+        }
+     fileWriter.close();
+    }
+   
+    catch(IOException e)
+        {
+            e.printStackTrace();
+        }  
+    }
+    
+    public void deleteCustomerEntry(String data) throws IOException{
+        //tring input = modifyPanel.deleteCustomerTextFieldFromFile();
+        //System.out.println(input);
+        FileWriter newCustomerFile = new FileWriter(PharmacyConstants.customersFilePath);
+        int deleteCustomer = Integer.parseInt(data) -1;
+        System.out.println(deleteCustomer);
+        customers.remove(deleteCustomer);
+        
+        for(int a = 0; a < customers.size(); a++)
+        {
+            newCustomerFile.write(customers.get(a).getCustomerID() + "," +
+                    customers.get(a).getCustomerName() + "," +
+                    customers.get(a).getDateOfBirth() + "," +
+                    customers.get(a).getAddress() + "," + 
+                    customers.get(a).getContactNumber() + "," +
+                    customers.get(a).getMedical() + "," +
+                    customers.get(a).getDrug());
+        }
+        newCustomerFile.close();
+    }
+    
+    public void deleteEmployeeEntry(String employee) throws IOException{
+        //String deleteRow = modifyPanel.deleteEmployeeTextFieldFromFile();
+        FileWriter fWriter = new FileWriter(PharmacyConstants.usersFilePath); 
+        int input = Integer.parseInt(employee) -1;
+        users.remove(input);
+        
+        
+        
+        for(int i = 0; i < users.size(); i++)
+        {
+                    fWriter.write(users.get(i).getUsername() + "," +
+                    users.get(i).getPassword() + "," +
+                    users.get(i).getRole() + "," +
+                    users.get(i).getPermission().getCanModifyCustomer() + "," + 
+                    users.get(i).getPermission().getCanModifyEmployee() + "," +
+                    users.get(i).getPermission().getCanModifyProducts() + "," +
+                    users.get(i).getPermission().getCanModifyProducts() + System.lineSeparator());
+        
+    }
+        fWriter.close();
+    }
+        ///////////////////////////
     
     public ArrayList<User> getUsers(){     
         return users;
     }
     
     public ArrayList<Drug> getDrugs(){
+        readDrugs();
         return drugs;
     }
     
@@ -222,6 +318,7 @@ public class DataBaseManagment {
     }
     
     public ArrayList<Prescription> getPrescriptions(){
+        readPrescriptions();
         return prescriptions;
     }
 }

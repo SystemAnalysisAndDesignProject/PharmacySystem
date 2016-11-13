@@ -9,6 +9,14 @@ package com.psmodel.Cart;
  *
  * @author Pascal
  */
-public interface Cart {
-    abstract double getCost();
+public abstract class Cart {
+    public String description;
+    public abstract double getCost();
+    public String getDescription(){
+        return "Empty Cart";
+    }
+    
+    public double Cost(){
+        return getCost();
+    }
 }

@@ -6,14 +6,21 @@
 package com.pscontroller;
 
 import com.psdb.DataBaseManagment;
+import com.psmodel.MainMenuModel;
+import com.psmodel.ModifyModel;
 import com.psmodel.perscription.Prescription;
 import com.psmodel.OrderModel;
+import com.psmodel.customer.Customer;
 import com.psmodel.product.Drug;
 import com.psview.OrderPanel;
 import com.psview.PharmacyView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,23 +35,80 @@ public class OrderController {
     private ArrayList <Drug> drugs;
     private ArrayList<Drug> presc;
     private ArrayList<Drug> nonpresc;
+    private boolean medical;
+    private boolean drug;
+
     
     public OrderController(PharmacyView pharmacy, OrderModel order) {
         this.pharmacy = pharmacy;
         this.order = order;
         
-        pharmacy.displayOrderPanel();
+        if(order.getUser().getRole().equalsIgnoreCase("m")){
+            pharmacy.displayOrderProcessManager();
+        }else{
+            pharmacy.displayOrderProcessEmployee();
+        }
     this.pharmacy.addOrderListener(new OrderListener());
     this.pharmacy.addToCartListener(new AddListener());
     this.pharmacy.addDelListener(new DelListener());
     this.pharmacy.addBackToMenu(new BackToMenu());
+    this.pharmacy.addCheckoutListener(new Checkout());
+    this.pharmacy.addPayListener(new Pay());
     }
+    
+    class Checkout implements ActionListener{
+    @Override
+    public void actionPerformed(ActionEvent e){
+       
+       String scheme = order.getScheme();
+       double price, price1;
+        ArrayList<String> items;
+           items = pharmacy.getCartDetails();
+       price = order.getCost(items);
+            price1 = order.getFinalPrice(price,scheme);
+            System.out.println("Price before scheme " + price);
+            System.out.println("Final price " + price1);
+            
+            pharmacy.displayCheckout(price,price1);
+    }
+    
+}
+    class Pay implements ActionListener{
+    @Override
+    public void actionPerformed(ActionEvent e){
+       // dispay reciept
+       System.out.println("printing reciept");
+       String scheme = order.getScheme();
+       
+       String cname = pharmacy.getCustomerName();
+       //String paymenttype = payment.get 
+       ArrayList<String> items = pharmacy.getCartDetails();
+       double price = order.getCost(items);
+       double finalPrice = order.getFinalPrice(price,scheme);
+       
+       pharmacy.displayReceipt(cname ,items ,finalPrice);
+       MainMenuModel model = new MainMenuModel(order.getDataBase(),order.getUser());
+       MainMenuController control = new MainMenuController(pharmacy,model);
+        try {
+            order.updateStock(items);
+        } catch (IOException ex) {
+            Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       pharmacy.setOrderInvisible();
+    }
+}
   
     class AddListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            pharmacy.addToCart();
+            String presc = order.getPrescriptionFor();
+            pharmacy.addToCart(presc);
+            ArrayList<String> items;
+           items = pharmacy.getCartDetails();
+            double price = order.getCost(items);
+            pharmacy.setPrice(price);
+           
         } 
 }
     class DelListener implements ActionListener {
@@ -52,6 +116,10 @@ public class OrderController {
         @Override
         public void actionPerformed(ActionEvent e) {
             pharmacy.deleteFromCart();
+            ArrayList<String> items;
+           items = pharmacy.getCartDetails();
+            double price = order.getCost(items);
+            pharmacy.setPrice(price);
         }
         
     }
@@ -60,34 +128,71 @@ public class OrderController {
     class OrderListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("1");
+
             String name = e.getActionCommand();
-          //String name= order.getCustomerName();
-          System.out.println("1");
-          System.out.println(name);
-          System.out.println("3");
-         // dbms = order.getDataBase();
-         // dbms.readPrescriptions();
-        dbms = new DataBaseManagment();
+
+         medical = false;
+         drug = false;
+         ArrayList<Customer> customers = order.getDataBase().getCustomers();
+         ArrayList<Prescription> prescriptions = order.getDataBase().getPrescriptions();
+         boolean inDB = false;
+         for(int x = 0; x < customers.size(); x++){
+             if(name.equalsIgnoreCase(customers.get(x).getCustomerName()))
+             {
+                 String prescriptionFor= prescriptions.get(x).getItems();
+                 order.setPrescriptionFor(prescriptionFor);
+                 inDB = true;
+                 if(customers.get(x).getMedical() == true){
+                     medical = true;
+                 }
+                 else if(customers.get(x).getDrug() == true){
+                     drug = true;
+                 }
+                 else{
+                     medical = false;
+                     drug = false;
+                 }
+             }
+         }
+        
+         while(inDB == false){
+             JOptionPane.showMessageDialog(null,"Please add customer to DataBase before order");
+             if(order.getUser().getRole().equals("M"))
+            {
+                pharmacy.setOrderInvisible();
+                ModifyModel modify = new ModifyModel(order.getDataBase(),order.getUser());
+                ModifyController control = new ModifyController(pharmacy,modify);
+                
+            }else{
+                  pharmacy.setOrderInvisible();
+                ModifyModel modify = new ModifyModel(order.getDataBase(),order.getUser());
+                ModifyController control = new ModifyController(pharmacy,modify);
+            }       
+             inDB= true;
+         }
          
-         ArrayList<Prescription> prescriptions = dbms.getPrescriptions();
+         
+
          boolean found = false;
+         String [] items = new String[20];
+         
          
          for(int i = 0; i < prescriptions.size() &&!found; i++){
             if(name.equalsIgnoreCase(prescriptions.get(i).getCustomerName())){
+                items = prescriptions.get(i).getItems().split(" ");
+               
                 found = true;
             }
+            else{
+               
+            }
         }
-        drugs = new ArrayList<Drug>(dbms.getDrugs());
-        Drug a = new Drug(4,"ket",20,100,false);
-        Drug b = new Drug(5,"heroine",40,1000,true);
-        Drug c = new Drug(6,"calpol",20,100,false);
-        Drug d = new Drug(7,"DMX",40,1000,true);
-        drugs.add(a);
-        drugs.add(b);
-        drugs.add(c);
-        drugs.add(d);
-        System.out.println(drugs.size());
+         System.out.println("test");
+        drugs = order.getDataBase().getDrugs();
+        System.out.println(order.getDataBase().getDrugs().size());
+        System.out.println("test 1");
+
+        System.out.println("size drugs " + drugs.size());
         presc = new ArrayList<Drug>();
         nonpresc = new ArrayList<Drug>();
          for(int j = 0; j < drugs.size(); j++){
@@ -101,16 +206,22 @@ public class OrderController {
          }
         System.out.println(" prescription " + presc.size());
         System.out.println("Non prescription " + nonpresc.size());
-        pharmacy.populateList(presc,nonpresc);
+        pharmacy.populateList(presc,nonpresc,items);
          
          if(found){
           System.out.println("found a prescription with that name");
           pharmacy.setVisibilityOrder();
-         // pharmacy.populateList(presc,nonpresc);
+          pharmacy.addCart(items);
+          ArrayList<String> items1 = new ArrayList<>();
+          for(int i = 0; i < items.length;i++){
+              items1.add(items[i]);
+          }
+          double price = order.getCost(items1);
+          pharmacy.setPrice(price);
+          order.setScheme(medical,drug);
         }
          else{
              System.out.println("No prescription found");
-             //pharmacy.populateList(presc,nonpresc); 
             }
         }
     }
@@ -121,10 +232,11 @@ public class OrderController {
             
             System.out.println("back to main menu clicked");
             if(order.getUser().getRole().equals("M")){
-                pharmacy.displayMainMenuManagerFromModify();
+                pharmacy.displayMainMenuManagerFromOrder();
             }else{
-                pharmacy.displayMainMenuEmployeeFromModify();
+                pharmacy.displayMainMenuEmployeeFromOrder();
             }
         }             
     }
+    
 }

@@ -1,3 +1,5 @@
-1,Aspirin,20,20.00,false
-2,Xanax,50,30.00,true
-3,Panadol,50,150.00,false;
+1,Calpol,32,7.0,false
+2,Aspirin,27,20.0,false
+3,Panadol,30,10.0,false
+4,Morphine,27,40.0,true
+5,Xanax,27,90.0,true

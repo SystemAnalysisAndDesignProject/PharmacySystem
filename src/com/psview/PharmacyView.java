@@ -2,10 +2,14 @@
 package com.psview;
 
 import com.psdb.DataBaseManagment;
+import com.psmodel.ModifyModel;
+import com.psmodel.PharmacyConstants;
 import com.psmodel.product.Drug;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,6 +27,8 @@ public class PharmacyView extends JFrame {
     private SalesReportPanel salesReportPanel;
     private OrderPanel order;
     private boolean customerBtnClicked = true;
+    private Color managerColor;
+    private Color employeeColor;
     
     
     public PharmacyView()
@@ -32,11 +38,18 @@ public class PharmacyView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(WIDTH,HEIGHT);        
         this.setLocationRelativeTo(null);
-        this.add(loginPanel);            
+        this.add(loginPanel); 
+        setIcon();
+        managerColor = new Color(1,161,133);
+        employeeColor = new Color(26,175,93);
+        //this.setFont(new Font("Copperplate Gothic Bold",Font.BOLD,100));
     }
 
     
-    
+    private void setIcon(){
+        ImageIcon img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
+        this.setIconImage(img.getImage());
+    }
    public String getUsername(){
         return loginPanel.getUsernameTxt();
     }
@@ -76,7 +89,8 @@ public class PharmacyView extends JFrame {
         loginPanel.setVisible(false);
         this.add(mainMenuPanel);        
         mainMenuPanel.setVisible(true);
-        mainMenuPanel.setBackground(Color.red);
+        
+        mainMenuPanel.setBackground(managerColor);
         mainMenuPanel.setWelcomeLbl("Welcome Manager");
         mainMenuPanel.salesReportBtnVisibility(true);
     }
@@ -86,8 +100,25 @@ public class PharmacyView extends JFrame {
         loginPanel.setVisible(false);
         this.add(mainMenuPanel);        
         mainMenuPanel.setVisible(true);
-        mainMenuPanel.setBackground(Color.blue);
+        mainMenuPanel.setBackground(employeeColor);
         mainMenuPanel.setWelcomeLbl("Welcome Employee");
+        mainMenuPanel.setButtonsPosition();
+    }
+    
+    public void displayOrderProcessEmployee(){
+        order = new OrderPanel();
+        mainMenuPanel.setVisible(false);
+        this.add(order);        
+        order.setVisible(true);
+        order.setBackground(employeeColor);
+    }
+    
+    public void displayOrderProcessManager(){
+        order = new OrderPanel();
+        mainMenuPanel.setVisible(false);
+        this.add(order);        
+        order.setVisible(true);
+        order.setBackground(managerColor);
     }
     
     //Main Menu Panel    
@@ -113,12 +144,51 @@ public class PharmacyView extends JFrame {
     public void displayTable(String[] columns, Object [][] drugs){
         modifyPanel.displayTable(columns,drugs);        
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public ArrayList <String> getCartDetails(){
+        ArrayList<String> items = order.cartDetails();
+        return items;
+    }
+    
+    public void displayCheckout(double price,double price1){
+        order.displayCheckout(price, price1);
+    }
+    
+    public void setPrice(double price){
+        order.setPrices(price);
+    }
+    
+    public void displayReceipt(String cname ,ArrayList<String> items , double finalPrice){
+        order.displayReceipt(cname,items,finalPrice);
+    }
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    public void displayMainMenuManagerFromOrder(){
+       order.setVisible(false); 
+       this.add(mainMenuPanel);
+       mainMenuPanel.setVisible(true);
+       mainMenuPanel.setBackground(managerColor);
+       mainMenuPanel.setWelcomeLbl("Welcome Manager");
+    }
+    
+    public void displayMainMenuEmployeeFromOrder(){
+       order.setVisible(false); 
+       this.add(mainMenuPanel);
+       mainMenuPanel.setVisible(true);
+       mainMenuPanel.setBackground(employeeColor);
+       mainMenuPanel.setWelcomeLbl("Welcome Employee");
+       mainMenuPanel.setButtonsPosition();
+    }
+        
     
     public void displayMainMenuManagerFromModify(){
         modifyPanel.setVisible(false);
         this.add(mainMenuPanel);        
         mainMenuPanel.setVisible(true);
-        mainMenuPanel.setBackground(Color.red);
+        mainMenuPanel.setBackground(managerColor);
         mainMenuPanel.setWelcomeLbl("Welcome Manager");
     }
     
@@ -126,19 +196,15 @@ public class PharmacyView extends JFrame {
         modifyPanel.setVisible(false);
         this.add(mainMenuPanel);        
         mainMenuPanel.setVisible(true);
-        mainMenuPanel.setBackground(Color.blue);
+        mainMenuPanel.setBackground(employeeColor);
         mainMenuPanel.setWelcomeLbl("Welcome Employee");
-    }
-    
-    
-    
-    
+    }   
     
     public void displayMainMenuManagerFromSalesReports(){
         salesReportPanel.setVisible(false);
         this.add(mainMenuPanel);        
         mainMenuPanel.setVisible(true);
-        mainMenuPanel.setBackground(Color.red);
+        mainMenuPanel.setBackground(managerColor);
         mainMenuPanel.setWelcomeLbl("Welcome Manager");
     }
     //Modify Panel
@@ -148,7 +214,7 @@ public class PharmacyView extends JFrame {
         mainMenuPanel.setVisible(false);        
         this.add(modifyPanel);        
         modifyPanel.setVisible(true);
-        modifyPanel.setBackground(Color.red);
+        modifyPanel.setBackground(managerColor);
     }
     
     public void displayModifyEmployee(){
@@ -157,16 +223,19 @@ public class PharmacyView extends JFrame {
         mainMenuPanel.setVisible(false);        
         this.add(modifyPanel);        
         modifyPanel.setVisible(true);
-        modifyPanel.setBackground(Color.blue);
+        modifyPanel.setBackground(employeeColor);
     }
+public void setOrderInvisible(){
+    order.setOrderInvisible();
+}
     
     public void displaySalesReport(){
        salesReportPanel = new SalesReportPanel();
        mainMenuPanel.setVisible(false);
        this.add(salesReportPanel);
        salesReportPanel.setVisible(true);
-       salesReportPanel.setBackground(Color.red);
-    }
+       salesReportPanel.setBackground(managerColor);
+    } 
     
     public void setVisibilityForCustomer(){
         modifyPanel.setVisibilityForCustomerDetails(customerBtnClicked);
@@ -207,20 +276,37 @@ public class PharmacyView extends JFrame {
         order.addOrderListener(listenerForOrderBtn);
     }
     
+    public void addPayListener(ActionListener listenerForPay){
+        order.addPayListener(listenerForPay);
+    }
+    
     public void setVisibilityOrder(){
         order.setVisibilityPrescription();
     }
     
-    public void populateList(ArrayList<Drug> presc,ArrayList<Drug> nonpresc){        
-        order.populateLists(presc,nonpresc);
+    public String getCustomerName(){
+        return order.getCustomerName();
+    }
+    
+    
+    public void populateList(ArrayList<Drug> presc,ArrayList<Drug> nonpresc,String [] items){        
+        order.populateLists(presc,nonpresc,items);
     }
     
     public void addToCartListener(ActionListener listenerForAdd){
         order.addToCartListener(listenerForAdd);
     }
     
-    public void addToCart(){
-        order.addItemsToCart();
+    public void addToCart(String items){
+        order.addItemsToCart(items);
+    }
+    
+    public void addCart(String [] items){
+        order.addCart(items);
+    }
+    
+    public void addCheckoutListener(ActionListener listenerForCheckout){
+        order.addCheckoutListener(listenerForCheckout);
     }
     
    public void addDelListener(ActionListener listenerForDelete){
@@ -238,11 +324,11 @@ public class PharmacyView extends JFrame {
     public void addDeleteListener1(ActionListener listenerForDeleteButton){
         modifyPanel.addDeleteListener1(listenerForDeleteButton);
     }
-    
+    /*
     public void addUpdateListener(ActionListener listenerForUpdateButton){
         modifyPanel.addUpdateListener(listenerForUpdateButton);
     }
-    
+    */
     
     
     public void addAddListenerForEmployee(ActionListener listenerForAddButtonForEmployee){
@@ -253,9 +339,10 @@ public class PharmacyView extends JFrame {
         modifyPanel.addDeleteListenerForEmployee(listenerForDeleteButtonForEmployee);
     }
     
+    /*
     public void addUpdateListenerForEmployee(ActionListener listenerForUpdateButtonForEmployee){
         modifyPanel.addUpdateListenerForEmployee(listenerForUpdateButtonForEmployee);
-    }
+    }*/
   
     public void addTextFieldListener(ActionListener listenerForAddTextField){
         modifyPanel.addTextFieldListener(listenerForAddTextField);
@@ -265,9 +352,11 @@ public class PharmacyView extends JFrame {
         modifyPanel.deleteTextFieldListener(listenerForDeleteTextField);
     }
     
+    /*
     public void updateTextFieldListener(ActionListener listenerForUpdateTextField){
         modifyPanel.updateTextFieldListener(listenerForUpdateTextField);
     }
+    */
     
     public void employeeAddTextFieldListener(ActionListener listenerForEmployeeAddTextField){
         modifyPanel.employeeAddTextFieldListener(listenerForEmployeeAddTextField);
@@ -277,9 +366,11 @@ public class PharmacyView extends JFrame {
         modifyPanel.employeeDeleteTextFieldListener(listenerForEmployeeDeleteTextField);
     }
     
+    /*
     public void employeeUpdateTextFieldListener(ActionListener listenerForEmployeeUpdateTextField){
         modifyPanel.employeeUpdateTextFieldListener(listenerForEmployeeUpdateTextField);
     }
+    */
     
     public void UpdateButtons(){ //add delete update buttons for customers
         modifyPanel.setUpdateButtonsVisible();
@@ -301,20 +392,20 @@ public class PharmacyView extends JFrame {
         modifyPanel.setAddVisible();
         modifyPanel.changeCustomerAddJLabel();
         modifyPanel.setDeleteInvisible();
-        modifyPanel.setUpdateInvisible();
+        //modifyPanel.setUpdateInvisible();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        modifyPanel.setUpdateInvisibleForEmployee();
+        //modifyPanel.setUpdateInvisibleForEmployee();
     }
     
     public void addOptionsForEmployee(){
         modifyPanel.changeEmployeeAddJLabel();
         modifyPanel.setAddVisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        modifyPanel.setUpdateInvisibleForEmployee();
+        //modifyPanel.setUpdateInvisibleForEmployee();
         modifyPanel.setAddInvisible();
         modifyPanel.setDeleteInvisible();
-        modifyPanel.setUpdateInvisible();
+        //modifyPanel.setUpdateInvisible();
         
     }
     public void UButtonInvisible(){
@@ -328,20 +419,20 @@ public class PharmacyView extends JFrame {
     public void deleteOptionsForCustomer(){
         modifyPanel.setDeleteVisible();
         modifyPanel.changeCustomerDeleteJLabel();
-        modifyPanel.setUpdateInvisible();
+        //modifyPanel.setUpdateInvisible();
         modifyPanel.setAddInvisible();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        modifyPanel.setUpdateInvisibleForEmployee();
+        //modifyPanel.setUpdateInvisibleForEmployee();
     }
     
     public void deleteOptionsForEmployee(){
         modifyPanel.setAddInvisible();
-        modifyPanel.setUpdateInvisible();
+        //modifyPanel.setUpdateInvisible();
         modifyPanel.changeEmployeeDeleteJLabel();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisible();
-        modifyPanel.setUpdateInvisibleForEmployee();
+        //modifyPanel.setUpdateInvisibleForEmployee();
         modifyPanel.setDeleteVisibleForEmployee();
     }
         
@@ -351,32 +442,41 @@ public class PharmacyView extends JFrame {
     }
     
     public void updateOptionsForCustomer(){
-        modifyPanel.setUpdateVisible();
-        modifyPanel.changeCustomerUpdateJLabel();
+        //modifyPanel.setUpdateVisible();
+        //modifyPanel.changeCustomerUpdateJLabel();
         modifyPanel.setAddInvisible();
         modifyPanel.setDeleteInvisible();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        modifyPanel.setUpdateInvisibleForEmployee();
+        //modifyPanel.setUpdateInvisibleForEmployee();
     }
     
     public void updateOptionsForEmployee(){
         modifyPanel.setAddInvisible();
         modifyPanel.setDeleteInvisible();
-        modifyPanel.setUpdateInvisible();
-        modifyPanel.changeEmployeeUpdateJLabel();
+        //modifyPanel.setUpdateInvisible();
+        //modifyPanel.changeEmployeeUpdateJLabel();
         modifyPanel.setDeleteInvisibleForEmployee();
         modifyPanel.setAddInvisibleForEmployee();
-        modifyPanel.setUpdateVisible();
+        //modifyPanel.setUpdateVisible();
     }
     
-    public void dontShowUpdateOptions(){
-        modifyPanel.setUpdateInvisible();
+   public String TextFieldToFile(){
+        return modifyPanel.addTextFieldToFile();
+        }
+   
+    public String employeeAddTextFieldToFile(){
+        return modifyPanel.addTextFieldForEmployeeToFile();
     }
     
-    public void TextFieldToFile(){
-        modifyPanel.addTextFieldToFile();
+    public String employeeDeleteTextFieldToFile(){
+        return modifyPanel.deleteEmployeeTextFieldFromFile();
     }
+    
+    public String customerDeleteTextFieldToFile(){
+        return modifyPanel.deleteCustomerTextFieldFromFile();
+    }
+   
    
     public void employeeAddJLabel(){
         modifyPanel.changeEmployeeAddJLabel();
@@ -384,10 +484,6 @@ public class PharmacyView extends JFrame {
     
     public void employeeDeleteJLabel(){
         modifyPanel.changeEmployeeDeleteJLabel();
-    }
-    
-    public void employeeUpdateJlabel(){
-        modifyPanel.changeEmployeeUpdateJLabel();
     }
     
     public void dontShowButtonsForProduct(){
@@ -398,4 +494,11 @@ public class PharmacyView extends JFrame {
         modifyPanel.setJLabelInvisible();
     }
     
+    public void setTableInvisible(){
+        modifyPanel.dontDisplayTable();
+    }
+    
+    public void dontShowForProduct(){
+        modifyPanel.dontShowButtonForProduct();
+    }
 }

@@ -15,9 +15,13 @@ public class UserFactory {
         {
             System.out.println("returned Employee");
             return new Employee();
-        }else{
+        }
+        
+        //else if(role.toLowerCase().equals("a")){
+           // return Admin.getInstance();
+        //}
+        else{
             return null;
         }
-    }
-    
+    }    
 }

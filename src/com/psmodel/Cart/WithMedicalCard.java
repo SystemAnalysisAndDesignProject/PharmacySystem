@@ -10,13 +10,19 @@ package com.psmodel.Cart;
  * @author Pascal
  */
 public class WithMedicalCard extends CartDecorator {
-    private Cart c; 
+   // private Cart c; 
     
-    public WithMedicalCard(Cart c){
-        super(c);
+    public WithMedicalCard(EmptyCart c){
+       // this.c = c;
+       super(c);
     }
     @Override
     public double getCost(){
         return c.getCost() * 0;
+    }
+    
+    @Override
+    public String getDescription(){
+        return c.getDescription() + "With Medical Card";
     }
 }

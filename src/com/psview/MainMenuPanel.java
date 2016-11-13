@@ -1,6 +1,10 @@
 package com.psview;
 
+import com.psmodel.PharmacyConstants;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +17,8 @@ public class MainMenuPanel extends JPanel{
     private JButton orderProcessBtn;
     private JButton logoutBtn;
     private JButton salesReportBtn;
+    private JLabel logo;
+    private ImageIcon img;
     
     
     public MainMenuPanel()
@@ -22,20 +28,21 @@ public class MainMenuPanel extends JPanel{
         orderProcessBtn = new JButton("Process Order");
         salesReportBtn = new JButton("Sales Reports");
         logoutBtn = new JButton("Logout");
-        welcomeLbl = new JLabel("Welcome ");
-        
+        welcomeLbl = new JLabel("Welcome ");   
+        img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
+        logo = new JLabel();
         
         //Setting Bounds
-        welcomeLbl.setBounds(350,20,150,20);
+        welcomeLbl.setBounds(320,20,150,20);
         modifyBtn.setBounds(100,250,150,20);
         orderProcessBtn.setBounds(300,250,150,20);
-        logoutBtn.setBounds(500,250,150,20);
-        salesReportBtn.setBounds(100,300,150,20);
-       
+        logoutBtn.setBounds(300,500,150,20);
+        salesReportBtn.setBounds(500,250,150,20);    
+        logo.setBounds(20,450,100,100);
         
-        
-        
-        this.setLayout(null);  
+        logo.setIcon(img);
+              
+      
         
         //Adding to panel
         this.add(modifyBtn);
@@ -43,8 +50,14 @@ public class MainMenuPanel extends JPanel{
         this.add(logoutBtn);
         this.add(welcomeLbl);
         this.add(salesReportBtn);
+        this.add(logo);
         salesReportBtn.setVisible(false);
-      
+        this.setLayout(null);  
+    }
+    
+    public void setButtonsPosition(){
+        modifyBtn.setLocation((int)modifyBtn.getLocation().getX() + 100,(int)modifyBtn.getLocation().getY());
+        orderProcessBtn.setLocation((int)orderProcessBtn.getLocation().getX() + 100,(int)orderProcessBtn.getLocation().getY());
     }
     
     public void salesReportBtnVisibility(boolean vis){

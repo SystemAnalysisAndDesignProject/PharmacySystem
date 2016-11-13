@@ -9,14 +9,13 @@ package com.psmodel.Cart;
  *
  * @author Pascal
  */
-abstract class CartDecorator implements Cart{
-    private Cart c;
-    
-    CartDecorator(Cart c){ 
+public class CartDecorator extends EmptyCart{
+    EmptyCart c;
+    public CartDecorator(EmptyCart c){
         this.c = c;
     }
-    
-    public double getCost() {
+    @Override
+    public double getCost(){
         return c.getCost();
     }
 }

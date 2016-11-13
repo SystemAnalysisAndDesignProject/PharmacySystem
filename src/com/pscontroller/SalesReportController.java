@@ -1,9 +1,9 @@
 package com.pscontroller;
 
 import com.psmodel.SalesReportModel;
-import com.psmodel.sales.SalesBarChart;
-import com.psmodel.sales.SalesPieChart;
 import com.psview.PharmacyView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class SalesReportController {
@@ -14,9 +14,21 @@ public class SalesReportController {
     {
         this.salesReportView = salesReportView;
         this.salesReportModel = salesReportModel;
-        
+     
         salesReportView.displaySalesReport();
         salesReportModel.initializeSubjectsAndObservers();
         
+        this.salesReportView.addBackToMainMenuFromSalesReportsListener(new BackToMainMenuListener());
+        
     }
+    
+    class BackToMainMenuListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("back to main menu clicked");
+                salesReportView.displayMainMenuManagerFromSalesReports();  
+        }             
+    }
+    
 }
+

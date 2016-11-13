@@ -43,6 +43,10 @@ public class Drug implements IProductItem,IGetInfo{
     public int getQuantity() {
        return _quantity;
     }
+    
+    public void setQuantity(int quantity){
+        _quantity = quantity;
+    }
 
     @Override
     public double getPrice() {

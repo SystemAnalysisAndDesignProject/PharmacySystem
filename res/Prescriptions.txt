@@ -1,2 +1,4 @@
-John Doe, Dr Billy Bob, panadol xanax,1
-JP Stokes, Dr Kush, xanax,2
+John Doe, Dr Billy Bob,Xanax,1
+JP Stokes, Dr Kush,Morphine ,2
+Mary,Dr Dolan,Xanax,3
+Joe, Dr Jim,Morphine,4

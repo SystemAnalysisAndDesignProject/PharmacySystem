@@ -4,7 +4,10 @@ import com.psmodel.user.User;
 import com.psdb.DataBaseManagment;
 import com.psmodel.customer.Customer;
 import com.psmodel.product.Drug;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ModifyModel {
     
@@ -51,7 +54,28 @@ public class ModifyModel {
          return columns;
      }
     
-      public void getArrayForAddButton(){
-         dbm.writeToCustomerArray();
-     }
+    public void customerWriteIntoDataBase(String something){
+        dbm.writeToCustomerArray(something);
+    }
+      
+    public void employeeWriteToDataBase(String textField){
+        dbm.updateEmployeeTable(textField);
+    }
+      
+    public void deleteFromDataBaseForCustomers(String data) {
+        try {
+            System.out.println(data);
+            dbm.deleteCustomerEntry(data);
+        } catch (IOException ex) {
+            Logger.getLogger(ModifyModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteFromDataBaseForEmployees(String delEmployee){
+        try{
+            dbm.deleteEmployeeEntry(delEmployee);
+        }catch(IOException ex){
+            Logger.getLogger(ModifyModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

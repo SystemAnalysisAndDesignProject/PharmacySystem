@@ -22,6 +22,13 @@ public class DrugFactory {
         }else if(name.equals("Panadol")){
             return new Panadol(productID,name,quantity,price,checkRequiresPerscription);
         }
+        else if(name.equals("Morphine")){
+            return new Morphine(productID,name,quantity,price,checkRequiresPerscription);
+        }
+        else if(name.equals("Calpol")){
+            return new Calpol(productID,name,quantity,price,checkRequiresPerscription);
+        }
+        
         
         return null;
     }
