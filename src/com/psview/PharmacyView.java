@@ -165,6 +165,9 @@ public class PharmacyView extends JFrame {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    public boolean checkForSelection(){
+        return order.getPayment();
+    }
     
     public void displayMainMenuManagerFromOrder(){
        order.setVisible(false); 

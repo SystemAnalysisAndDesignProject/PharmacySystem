@@ -77,7 +77,8 @@ public class OrderController {
     @Override
     public void actionPerformed(ActionEvent e){
        // dispay reciept
-       System.out.println("printing reciept");
+       if(!pharmacy.checkForSelection()){
+                System.out.println("printing reciept");
        String scheme = order.getScheme();
        
        String cname = pharmacy.getCustomerName();
@@ -95,6 +96,8 @@ public class OrderController {
             Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
        pharmacy.setOrderInvisible();
+        }
+      
     }
 }
   
@@ -139,8 +142,12 @@ public class OrderController {
          for(int x = 0; x < customers.size(); x++){
              if(name.equalsIgnoreCase(customers.get(x).getCustomerName()))
              {
-                 String prescriptionFor= prescriptions.get(x).getItems();
-                 order.setPrescriptionFor(prescriptionFor);
+                 for(int y =0; y < prescriptions.size();y++){
+                     if(prescriptions.get(y).getCustomerName().equalsIgnoreCase(customers.get(x).getCustomerName())){
+                         String prescriptionFor = prescriptions.get(x).getItems();
+                             order.setPrescriptionFor(prescriptionFor);
+                     }
+                 }                 
                  inDB = true;
                  if(customers.get(x).getMedical() == true){
                      medical = true;

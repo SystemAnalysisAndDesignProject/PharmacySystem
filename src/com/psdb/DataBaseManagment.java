@@ -207,7 +207,7 @@ public class DataBaseManagment {
                     customers.get(i).getAddress() + "," + 
                     customers.get(i).getContactNumber() + "," +
                     customers.get(i).getMedical() + "," +
-                    customers.get(i).getDrug());
+                    customers.get(i).getDrug() + System.lineSeparator());
          
         }
     fw.close();
@@ -272,7 +272,7 @@ public class DataBaseManagment {
                     customers.get(a).getAddress() + "," + 
                     customers.get(a).getContactNumber() + "," +
                     customers.get(a).getMedical() + "," +
-                    customers.get(a).getDrug());
+                    customers.get(a).getDrug() + System.lineSeparator());
         }
         newCustomerFile.close();
     }
@@ -300,7 +300,8 @@ public class DataBaseManagment {
     }
         ///////////////////////////
     
-    public ArrayList<User> getUsers(){     
+    public ArrayList<User> getUsers(){  
+        readUsers();
         return users;
     }
     
@@ -310,6 +311,7 @@ public class DataBaseManagment {
     }
     
     public ArrayList<Customer> getCustomers(){
+        readCustomers();
         return customers;
     }
     

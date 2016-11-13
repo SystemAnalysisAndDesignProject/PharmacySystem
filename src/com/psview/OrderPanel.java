@@ -292,7 +292,11 @@ public class OrderPanel extends JPanel {
         payment.setVisible(true);
         p1.setVisible(false);
         p2.setVisible(true);
+        pay.setVisible(false);
+        
         payment.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+               
         mess = new JLabel("Select payment option and press pay");
         this.add(mess);
         mess.setBounds(100,150,250,20);
@@ -335,6 +339,10 @@ public class OrderPanel extends JPanel {
     public String getCustomerName(){
         String cname = name.getText();      
         return cname;
+    }
+    
+    public boolean getPayment(){
+        return payment.isSelectionEmpty();
     }
 
     public void addToCartListener(ActionListener listenerForAdd) {
