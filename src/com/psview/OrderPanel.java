@@ -336,9 +336,9 @@ public class OrderPanel extends JPanel {
         }
         String item=""; 
         for(int i = 0; i < items.size(); i++){
-            item += items.get(i) + "\n";
+            item += "\n" + items.get(i);
         }
-        JOptionPane.showMessageDialog(null,"Customer Name : " + cusname + "\n" + "Products : " + item + "\n" + "Price : " 
+        JOptionPane.showMessageDialog(null,"Customer Name : " + cusname + "\n\n" + "Products" + item + "\n\n" +  "Price : " 
                 + finalPrice + "\n" + "Payed by : " + payment,"Receipt",1 );
     }
     public void setOrderInvisible(){
