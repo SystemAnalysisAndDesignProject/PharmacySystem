@@ -21,7 +21,11 @@ public class OrderModel {
     private boolean medical;
     private boolean drug;
     private String prescriptionFor;
-
+    private boolean inDb;
+    private  String [] items;
+    private ArrayList<Drug> presc;
+    private ArrayList<Drug> nonpresc;
+    
     public OrderModel(DataBaseManagment dbm, User user) {
         this.dbm = dbm;
         this.user =user;
@@ -48,6 +52,15 @@ public class OrderModel {
      drug = drug1;
  }
  
+ public ArrayList<String> getCurrentItems(){
+     ArrayList<String> items1 = new ArrayList<>();
+          for(int i = 0; i < getItems().length;i++){
+              items1.add(getItems()[i]);
+          }
+          return items1;
+ }
+         
+          
  public String getScheme(){
      if(medical == true){
          return "medical";
@@ -137,4 +150,87 @@ public class OrderModel {
        dbm.updateSales(num);
        
    }
+   
+   public void setPrescription(String name,ArrayList<Customer> customers,ArrayList<Prescription> prescriptions){
+        for(int x = 0; x < customers.size(); x++){
+             if(name.equalsIgnoreCase(customers.get(x).getCustomerName()))
+             {
+                 for(int y =0; y < prescriptions.size();y++){
+                     if(prescriptions.get(y).getCustomerName().equalsIgnoreCase(customers.get(x).getCustomerName())){
+                         String prescriptionFor = prescriptions.get(x).getItems();
+                             setPrescriptionFor(prescriptionFor);
+                     }
+                 }                 
+                 this.inDb = true;
+                 if(customers.get(x).getMedical() == true){
+                     this.medical = true;
+                 }
+                 else if(customers.get(x).getDrug() == true){
+                     this.drug = true;
+                 }
+                 else{
+                     this.medical = false;
+                     this.drug = false;
+                 }
+             }
+         }
+   }
+   
+   public boolean checkForPrescription(String name,ArrayList<Prescription> prescriptions){
+         boolean found = false;
+        items = new String[20];
+                 
+         for(int i = 0; i < prescriptions.size() &&!found; i++){
+            if(name.equalsIgnoreCase(prescriptions.get(i).getCustomerName())){
+                items = prescriptions.get(i).getItems().split(" ");
+               
+                found = true;
+            }
+            else{
+               
+            }
+        }
+         return found;
+   }
+   
+   public void checkRequirePrescription(ArrayList<Drug> drugs){
+       presc = new ArrayList<Drug>();
+        nonpresc = new ArrayList<Drug>();
+         for(int j = 0; j < drugs.size(); j++){
+             if(drugs.get(j).checkRequiresPerscription()== true) {
+                 presc.add(drugs.get(j));
+             }
+             else{
+                 nonpresc.add(drugs.get(j));
+             }
+         }
+   }
+   
+   public ArrayList<Drug> getPresc(){
+       return presc;
+   }
+   
+   public ArrayList<Drug> getNonPresc(){
+       return nonpresc;
+   }
+   
+   public boolean getInDB(){
+       return inDb;
+   }
+   
+   public boolean getMedical(){
+       return medical;
+   }
+   
+   public boolean getDrug(){
+       return drug;
+   }
+   
+  public void setInDB(boolean inDb){
+      this.inDb = inDb;
+  } 
+  
+  public String [] getItems(){
+      return items;
+  }
 }  
