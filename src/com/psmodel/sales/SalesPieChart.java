@@ -39,16 +39,11 @@ public class SalesPieChart implements IObserver
     public void createPieChartImage(int x, int y, int z) throws IOException
     {
       DefaultPieDataset dataset = new DefaultPieDataset( );
-      dataset.setValue("Sales involving Medical Card", new Double( x ) );
+      dataset.setValue("Sales involving Perscription", new Double( x ) );
       dataset.setValue("Sales involving Drug Scheme", new Double( y ) );
       dataset.setValue("Reglar Sales", new Double( z ) );
 
-      JFreeChart chart = ChartFactory.createPieChart(
-         "Sales Report", // chart title
-         dataset, // data
-         true, // include legend
-         true,
-         false);
+      JFreeChart chart = ChartFactory.createPieChart("Sales Report", dataset, true, true, false);
          
       int width = 352; //image width
       int height = 264; //image height

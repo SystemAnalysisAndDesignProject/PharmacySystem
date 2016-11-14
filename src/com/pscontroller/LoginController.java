@@ -32,12 +32,8 @@ public class LoginController {
                 if(!userExists)
                 {
                     loginView.displayErrorMessage("Invalid Username or Password");
-                }else{ 
-                    System.out.println("You have successfully logged in as a " + loginModel.getUser().getRole());
-                    System.out.println("Your Permissions : " + loginModel.getUser().getPermission().getCanModifyCustomer() + " " +
-                                        loginModel.getUser().getPermission().getCanModifyManager() + " " +
-                                        loginModel.getUser().getPermission().getCanModifyEmployee() + " " +
-                                        loginModel.getUser().getPermission().getCanModifyProducts());
+                }else{
+                    
                     MainMenuModel mainMenuModel = new MainMenuModel(loginModel.getDataBase(),loginModel.getUser());                    
                     MainMenuController mainMenuController = new MainMenuController(loginView,mainMenuModel);                  
                 }          

@@ -55,7 +55,6 @@ public class DataBaseManagment {
                 
                 Prescription prescription = new Prescription(name,gpName,pres,prescriptionID);
                 
-                System.out.println(prescription.getDescription());
                prescriptions.add(prescription);
             }            
         }catch(IOException e){
@@ -110,7 +109,6 @@ public class DataBaseManagment {
                                           Integer.parseInt(tempDrug[2]),Double.parseDouble(tempDrug[3]),
                                           Boolean.parseBoolean(tempDrug[4]));
                 
-                System.out.println(drug.getDescription());
                
                 drugs.add(drug);
             }            
@@ -134,7 +132,6 @@ public class DataBaseManagment {
     }
     
     public void updateSales(int [] num){
-        System.out.println("updating sales");
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(PharmacyConstants.salesDetailsFilePath));
             String line = num[0] + "," + num[1] + "," + num[2];
@@ -163,7 +160,6 @@ public class DataBaseManagment {
                                                 Boolean.parseBoolean(tempCustomer[5]),
                                                 Boolean.parseBoolean(tempCustomer[6]));
                 
-                System.out.println(customer.getCustomerID());
                 
                
                 customers.add(customer);
@@ -204,15 +200,12 @@ public class DataBaseManagment {
     try{
     String fileAdd = something;
     String[] array = fileAdd.split(",");
-    System.out.println("a");    
     FileWriter fw = new FileWriter(PharmacyConstants.customersFilePath); //the true will append the new data
     Customer customer = new Customer(Integer.parseInt(array[0]),array[1],array[2],array[3],
                                                 Integer.parseInt(array[4]),
                                                 Boolean.parseBoolean(array[5]),
                                                 Boolean.parseBoolean(array[6]));
-    System.out.println("GOOD");
     customers.add(customer);
-    System.out.println("b");
     for(int i = 0; i < customers.size(); i++)
         {
             fw.write(customers.get(i).getCustomerID() + "," +
@@ -271,13 +264,11 @@ public class DataBaseManagment {
     }
     
     public void deleteCustomerEntry(String data) throws IOException{
-        //tring input = modifyPanel.deleteCustomerTextFieldFromFile();
-        //System.out.println(input);
+        
         FileWriter newCustomerFile = new FileWriter(PharmacyConstants.customersFilePath);
         try{        
             int deleteCustomer = Integer.parseInt(data) -1;
             
-            System.out.println(deleteCustomer + "costam");
             customers.remove(deleteCustomer);
         
             for(int a = 0; a < customers.size(); a++)

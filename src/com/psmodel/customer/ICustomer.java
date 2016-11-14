@@ -1,7 +1,5 @@
 package com.psmodel.customer;
 
-import com.psmodel.perscription.Prescription;
-
 public interface ICustomer {
     public String getCustomerName();
     public String getDateOfBirth();

@@ -1,12 +1,9 @@
-
 package com.pscontroller;
 
 import com.psmodel.MainMenuModel;
 import com.psmodel.ModifyModel;
 import com.psmodel.OrderModel;
 import com.psmodel.SalesReportModel;
-import com.psmodel.customer.Customer;
-import com.psmodel.perscription.Prescription;
 import com.psview.PharmacyView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +45,6 @@ public class MainMenuController {
     class OrderProcessListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("order process clicked");
             OrderModel orderModel = new OrderModel(mainMenuModel.getDataBase(),mainMenuModel.getUser());
             OrderController control = new OrderController(mainMenuView, orderModel);            
         }        
@@ -58,14 +54,12 @@ public class MainMenuController {
         @Override
         public void actionPerformed(ActionEvent e) {
            mainMenuView.displayLoginPanel();
-           System.out.println("Logged Out");
         }        
     }
     
     class SalesReportListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-           System.out.println("sales report clicked");
            SalesReportModel salesReportModel = new SalesReportModel(mainMenuModel.getDataBase());                    
             try {
                 SalesReportController salesReportController = new SalesReportController(mainMenuView,salesReportModel);

@@ -13,15 +13,12 @@ import javax.swing.JTable;
 public class ModifyPanel extends JPanel{
     
     private JButton customerBtn;
-    //private JButton managerBtn;
     private JButton employeeBtn;
     private JButton productBtn;
     private JButton addButton;
     private JButton deleteButton;
-    //private JButton updateButton;
     private JButton addButtonForEmployee;
     private JButton deleteButtonForEmployee;
-    //private JButton updateButtonForEmployee;
     private JLabel addInfoLabel;
     private JButton backToMenuBtn;
     private JTextField firstNameTxt;
@@ -30,10 +27,8 @@ public class ModifyPanel extends JPanel{
     private JScrollPane scrollPane;
     private JTextField addTextField;
     private JTextField deleteTextField;
-    //private JTextField updateTextField;
     private JTextField employeeAddTextField;
     private JTextField employeeDeleteTextField;
-    //private JTextField employeeUpdateTextField;
     private ImageIcon img;
     private JLabel logo;
     
@@ -42,7 +37,6 @@ public class ModifyPanel extends JPanel{
         this.setLayout(null);        
         //Initializing
         customerBtn = new JButton("Customer");
-       // managerBtn = new JButton("Manager");
         employeeBtn = new JButton("Employee");
         productBtn = new JButton("Product");
         backToMenuBtn = new JButton("Back To Main Menu");
@@ -50,86 +44,66 @@ public class ModifyPanel extends JPanel{
         scrollPane = new JScrollPane(table);      
         addButton = new JButton("Add");
         deleteButton = new JButton("Delete");
-        //updateButton = new JButton("Update");
         addButtonForEmployee = new JButton("Add");
         deleteButtonForEmployee = new JButton("Delete");
-        //updateButtonForEmployee = new JButton("Update");
         addInfoLabel = new JLabel("");
         addTextField = new JTextField("");
         deleteTextField = new JTextField("");
-        //updateTextField = new JTextField("");
         employeeAddTextField = new JTextField("");
         employeeDeleteTextField = new JTextField("");
-         img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
-        logo = new JLabel();
-       
-       logo.setIcon(img);
-       
-        //employeeUpdateTextField = new JTextField("");   
-        
+        img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
+        logo = new JLabel();       
+        logo.setIcon(img);
+
         //Setting Position      
         customerBtn.setBounds(120, 20, 150, 20);
-        //managerBtn.setBounds(210, 20, 150, 20);
         employeeBtn.setBounds(320, 20, 150, 20);
         productBtn.setBounds(520, 20, 150, 20);
         backToMenuBtn.setBounds(510, 500, 150, 20);
         scrollPane.setBounds(10, 250, 200, 300);
         addButton.setBounds(30, 100, 150, 20);
         deleteButton.setBounds(30, 140, 150, 20);
-        //updateButton.setBounds(30, 140, 150, 20);
         addButtonForEmployee.setBounds(30, 100, 150, 20);
         deleteButtonForEmployee.setBounds(30, 140, 150, 20);
-        //updateButtonForEmployee.setBounds(30, 140, 150, 20);
         addInfoLabel.setBounds(210, 120, 510, 20);
         addTextField.setBounds(210, 140, 510, 20);
         deleteTextField.setBounds(210, 140, 510, 20);
-        //updateTextField.setBounds(210, 140, 510, 20);
         employeeAddTextField.setBounds(210, 140, 510, 20);
         employeeDeleteTextField.setBounds(210, 140, 510, 20);
-        //employeeUpdateTextField.setBounds(210, 140, 510, 20);
         logo.setBounds(20,450,100,100); 
+        
         //Adding to components to Panel
         this.add(customerBtn);
-        //this.add(managerBtn);
         this.add(employeeBtn);
         this.add(productBtn);
         this.add(backToMenuBtn);      
         this.add(scrollPane);
         this.add(addButton);
         this.add(deleteButton);
-        //this.add(updateButton);
         this.add(addButtonForEmployee);
         this.add(deleteButtonForEmployee);
-        //this.add(updateButtonForEmployee);
         this.add(addInfoLabel);
         this.add(addTextField);
         this.add(deleteTextField);
-        //this.add(updateTextField);
         this.add(employeeAddTextField);
         this.add(employeeDeleteTextField);
-        //this.add(employeeUpdateTextField);
         this.add(logo);
                 
         //Visibility
         addButton.setVisible(false);
         deleteButton.setVisible(false);
-        //updateButton.setVisible(false);
         addButtonForEmployee.setVisible(false);
         deleteButtonForEmployee.setVisible(false);
-        //updateButtonForEmployee.setVisible(false);
         addInfoLabel.setVisible(false);
         addTextField.setVisible(false);
         deleteTextField.setVisible(false);
-        //updateTextField.setVisible(false);
         employeeAddTextField.setVisible(false);
         employeeDeleteTextField.setVisible(false);
-        //employeeUpdateTextField.setVisible(false);
         scrollPane.setVisible(false);
         table.setVisible(false);
     }
     
     public void setVisibilityForEmployee(){
-        //managerBtn.setVisible(false);
         employeeBtn.setVisible(false);
         productBtn.setVisible(false);        
     }   
@@ -168,7 +142,6 @@ public class ModifyPanel extends JPanel{
     
     public void setAddInvisible(){
         addTextField.setVisible(false);
-        //addInfoLabel.setVisible(false);
     }
     
     public void setDeleteVisible(){
@@ -178,21 +151,8 @@ public class ModifyPanel extends JPanel{
     
     public void setDeleteInvisible(){
         deleteTextField.setVisible(false);
-        //addInfoLabel.setVisible(false);
     }
     
-    /*
-    public void setUpdateVisible(){
-        updateTextField.setVisible(true);
-        addInfoLabel.setVisible(true);
-    }
-
-    
-    public void setUpdateInvisible(){
-        updateTextField.setVisible(false);
-        //addInfoLabel.setVisible(false);
-    }*/
-
     public void setAddVisibleForEmployee(){
         employeeAddTextField.setVisible(true);
         addInfoLabel.setVisible(true);
@@ -200,7 +160,6 @@ public class ModifyPanel extends JPanel{
     
     public void setAddInvisibleForEmployee(){
         employeeAddTextField.setVisible(false);
-        //addInfoLabel.setVisible(false);
     }
     
     public void setDeleteVisibleForEmployee(){
@@ -210,65 +169,44 @@ public class ModifyPanel extends JPanel{
     
     public void setDeleteInvisibleForEmployee(){
         employeeDeleteTextField.setVisible(false);
-        //addInfoLabel.setVisible(false);
     }
-    
-    /*  
-    public void setUpdateVisibleForEmployee(){
-        employeeUpdateTextField.setVisible(true);
-        addInfoLabel.setVisible(true);
-    }
-    
-    public void setUpdateInvisibleForEmployee(){
-        employeeUpdateTextField.setVisible(false);
-        //addInfoLabel.setVisible(false);
-    }
-    */
     
     public void setJLabelInvisible(){
         addInfoLabel.setVisible(false);
     }
 
     public void setUpdateButtonsVisible(){
-        //updateButton.setVisible(true);
         addButton.setVisible(true);
         deleteButton.setVisible(true);
     }
     
     public void setUpdateButtonsInvisible(){
-        //updateButton.setVisible(false);
         addButton.setVisible(false);
         deleteButton.setVisible(false);
     }
 
      public void setUpdateButtonsForEmployeeVisible(){
-        //updateButtonForEmployee.setVisible(true);
         addButtonForEmployee.setVisible(true);
         deleteButtonForEmployee.setVisible(true);
     }
     
     public void setUpdateButtonsForEmployeeInvisible(){
-        //updateButtonForEmployee.setVisible(false);
         addButtonForEmployee.setVisible(false);
         deleteButtonForEmployee.setVisible(false);
     }
     
     public String addTextFieldToFile(){
         String addTextFieldWriting = addTextField.getText();
-        System.out.println(addTextFieldWriting);
         return addTextFieldWriting;  
     }
     
     public String addTextFieldForEmployeeToFile(){
         String empAddTextField = employeeAddTextField.getText();
-        System.out.println(employeeAddTextField);
         return empAddTextField;
     }
     
     public String deleteCustomerTextFieldFromFile(){
         String deleteTextFieldForCustomers = deleteTextField.getText();
-        System.out.println(deleteTextFieldForCustomers);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
         return deleteTextFieldForCustomers;
     }
     
@@ -286,12 +224,6 @@ public class ModifyPanel extends JPanel{
         addInfoLabel.setText("Select which row you want to delete. e.g. row 2");
     }
     
-    /*
-    public void changeEmployeeUpdateJLabel(){
-        addInfoLabel.setText("Select which row you want to update. e.g. row 2");
-    }
-    */
-    
     public void changeCustomerAddJLabel(){
         addInfoLabel.setText("Enter the customers details. e.g. 1234,John Doe,21-11-1996,Limerick,0861234567,true,false");
     }
@@ -300,26 +232,16 @@ public class ModifyPanel extends JPanel{
         addInfoLabel.setText("Select which row you want to delete. e.g. row 1");
     }
     
-    /*
-    public void changeCustomerUpdateJLabel(){
-        addInfoLabel.setText("Select which row you want to update. e.g. row 1");
-    }
-    */
-    
     public void DontDisplayUpdatesForManager(){
         addButton.setVisible(false);
         deleteButton.setVisible(false);
-        //updateButton.setVisible(false);
         addButtonForEmployee.setVisible(false);
         deleteButtonForEmployee.setVisible(false);
-        //updateButtonForEmployee.setVisible(false);
         addInfoLabel.setVisible(false);
         addTextField.setVisible(false);
         deleteTextField.setVisible(false);
-        //updateTextField.setVisible(false);
         employeeAddTextField.setVisible(false);
         employeeDeleteTextField.setVisible(false);
-        //employeeUpdateTextField.setVisible(false);
         scrollPane.setVisible(false);
         table.setVisible(false);
     }
@@ -339,11 +261,7 @@ public class ModifyPanel extends JPanel{
     public void addCustomerListener(ActionListener listenerForCustomerBtn){
         customerBtn.addActionListener(listenerForCustomerBtn);
     }
-    
-    //public void addManagerListener(ActionListener listenerForManagerBtn){
-   //     managerBtn.addActionListener(listenerForManagerBtn);
-    //}
-    
+
     public void addEmployeeListener(ActionListener listenerForEmployeeBtn){
         employeeBtn.addActionListener(listenerForEmployeeBtn);
     }
@@ -364,11 +282,6 @@ public class ModifyPanel extends JPanel{
         deleteButton.addActionListener(listenerForDeleteButton);
     }
     
-    /*
-    public void addUpdateListener(ActionListener listenerForUpdateButton){
-        updateButton.addActionListener(listenerForUpdateButton);
-    }*/
-   
     public void addAddListenerForEmployee(ActionListener listenerForAddButtonForEmployee){
         addButtonForEmployee.addActionListener(listenerForAddButtonForEmployee);
     }
@@ -377,12 +290,6 @@ public class ModifyPanel extends JPanel{
         deleteButtonForEmployee.addActionListener(listenerForDeleteButtonForEmployee);
     }
     
-    /*
-    public void addUpdateListenerForEmployee(ActionListener listenerForUpdateButtonForEmployee){
-        updateButtonForEmployee.addActionListener(listenerForUpdateButtonForEmployee);
-    }
-    */
-    
     public void addTextFieldListener(ActionListener listenerForAddTextField){
         addTextField.addActionListener(listenerForAddTextField);
     }
@@ -390,12 +297,7 @@ public class ModifyPanel extends JPanel{
     public void deleteTextFieldListener(ActionListener listenerForDeleteTextField){
         deleteTextField.addActionListener(listenerForDeleteTextField);
     }
-    
-    /*
-    public void updateTextFieldListener(ActionListener listenerForUpdateTextField){
-        updateTextField.addActionListener(listenerForUpdateTextField);
-    }*/
-    
+
     public void employeeAddTextFieldListener(ActionListener listenerForEmployeeAddTextField){
         employeeAddTextField.addActionListener(listenerForEmployeeAddTextField);
     }
@@ -403,9 +305,4 @@ public class ModifyPanel extends JPanel{
     public void employeeDeleteTextFieldListener(ActionListener listenerForEmployeeDeleteTextField){
         employeeDeleteTextField.addActionListener(listenerForEmployeeDeleteTextField);
     }
-    
-    /*
-    public void employeeUpdateTextFieldListener(ActionListener listenerForEmployeeUpdateTextField){
-        employeeUpdateTextField.addActionListener(listenerForEmployeeUpdateTextField);
-    }*/
 }

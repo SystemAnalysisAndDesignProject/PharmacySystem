@@ -20,12 +20,6 @@ public class SalesChart implements IObserver
      latestMedicalCardSales = value;
      latestDrugSchemeSales = value2;
      latestRegularSales = value3;
-     display();
-    }
-
-    public void display()
-    {
-      //Display Chart
     }
 
     public void unsubscribe()

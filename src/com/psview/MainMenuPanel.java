@@ -40,9 +40,7 @@ public class MainMenuPanel extends JPanel{
         salesReportBtn.setBounds(500,250,150,20);    
         logo.setBounds(20,450,100,100);
         
-        logo.setIcon(img);
-              
-      
+        logo.setIcon(img);    
         
         //Adding to panel
         this.add(modifyBtn);

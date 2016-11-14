@@ -2,18 +2,14 @@
 package com.psview;
 
 import com.psdb.DataBaseManagment;
-import com.psmodel.ModifyModel;
 import com.psmodel.PharmacyConstants;
 import com.psmodel.product.Drug;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class PharmacyView extends JFrame {
     
@@ -42,9 +38,7 @@ public class PharmacyView extends JFrame {
         setIcon();
         managerColor = new Color(1,161,133);
         employeeColor = new Color(26,175,93);
-        //this.setFont(new Font("Copperplate Gothic Bold",Font.BOLD,100));
     }
-
     
     private void setIcon(){
         ImageIcon img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
@@ -121,7 +115,6 @@ public class PharmacyView extends JFrame {
         order.setBackground(managerColor);
     }
     
-    //Main Menu Panel    
     public void addModifyListener(ActionListener listenerForModifyBtn){
         mainMenuPanel.addModifyListener(listenerForModifyBtn);
     }
@@ -144,7 +137,7 @@ public class PharmacyView extends JFrame {
     public void displayTable(String[] columns, Object [][] drugs){
         modifyPanel.displayTable(columns,drugs);        
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public ArrayList <String> getCartDetails(){
         ArrayList<String> items = order.cartDetails();
         return items;
@@ -161,9 +154,6 @@ public class PharmacyView extends JFrame {
     public void displayReceipt(String cname ,ArrayList<String> items , double finalPrice){
         order.displayReceipt(cname,items,finalPrice);
     }
-    
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     public boolean checkForSelection(){
         return order.getPayment();
@@ -187,7 +177,6 @@ public class PharmacyView extends JFrame {
        mainMenuPanel.setVisible(true);
        mainMenuPanel.setBackground(employeeColor);
        mainMenuPanel.setWelcomeLbl("Welcome Employee");
-      // mainMenuPanel.setButtonsPosition();
     }
         
     
@@ -214,7 +203,6 @@ public class PharmacyView extends JFrame {
         mainMenuPanel.setBackground(managerColor);
         mainMenuPanel.setWelcomeLbl("Welcome Manager");
     }
-    //Modify Panel
     
     public void displayModifyManager(){
         modifyPanel = new ModifyPanel();
@@ -252,10 +240,6 @@ public void setOrderInvisible(){
     public void addCustomerListener(ActionListener listenerForCustomerBtn){
         modifyPanel.addCustomerListener(listenerForCustomerBtn);
     }
-    
-    //public void addManagerListener(ActionListener listenerForManagerBtn){
-    //    modifyPanel.addManagerListener(listenerForManagerBtn);
-    //}
     
     public void addEmployeeListener(ActionListener listenerForEmployeeBtn){
         modifyPanel.addEmployeeListener(listenerForEmployeeBtn);
@@ -331,12 +315,6 @@ public void setOrderInvisible(){
     public void addDeleteListener1(ActionListener listenerForDeleteButton){
         modifyPanel.addDeleteListener1(listenerForDeleteButton);
     }
-    /*
-    public void addUpdateListener(ActionListener listenerForUpdateButton){
-        modifyPanel.addUpdateListener(listenerForUpdateButton);
-    }
-    */
-    
     
     public void addAddListenerForEmployee(ActionListener listenerForAddButtonForEmployee){
         modifyPanel.addAddListenerForEmployee(listenerForAddButtonForEmployee);
@@ -346,11 +324,6 @@ public void setOrderInvisible(){
         modifyPanel.addDeleteListenerForEmployee(listenerForDeleteButtonForEmployee);
     }
     
-    /*
-    public void addUpdateListenerForEmployee(ActionListener listenerForUpdateButtonForEmployee){
-        modifyPanel.addUpdateListenerForEmployee(listenerForUpdateButtonForEmployee);
-    }*/
-  
     public void addTextFieldListener(ActionListener listenerForAddTextField){
         modifyPanel.addTextFieldListener(listenerForAddTextField);
     }
@@ -358,12 +331,6 @@ public void setOrderInvisible(){
     public void deleteTextFieldListener(ActionListener listenerForDeleteTextField){
         modifyPanel.deleteTextFieldListener(listenerForDeleteTextField);
     }
-    
-    /*
-    public void updateTextFieldListener(ActionListener listenerForUpdateTextField){
-        modifyPanel.updateTextFieldListener(listenerForUpdateTextField);
-    }
-    */
     
     public void employeeAddTextFieldListener(ActionListener listenerForEmployeeAddTextField){
         modifyPanel.employeeAddTextFieldListener(listenerForEmployeeAddTextField);
@@ -373,13 +340,7 @@ public void setOrderInvisible(){
         modifyPanel.employeeDeleteTextFieldListener(listenerForEmployeeDeleteTextField);
     }
     
-    /*
-    public void employeeUpdateTextFieldListener(ActionListener listenerForEmployeeUpdateTextField){
-        modifyPanel.employeeUpdateTextFieldListener(listenerForEmployeeUpdateTextField);
-    }
-    */
-    
-    public void UpdateButtons(){ //add delete update buttons for customers
+    public void UpdateButtons(){
         modifyPanel.setUpdateButtonsVisible();
     }
     
@@ -399,21 +360,16 @@ public void setOrderInvisible(){
         modifyPanel.setAddVisible();
         modifyPanel.changeCustomerAddJLabel();
         modifyPanel.setDeleteInvisible();
-        //modifyPanel.setUpdateInvisible();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        //modifyPanel.setUpdateInvisibleForEmployee();
     }
     
     public void addOptionsForEmployee(){
         modifyPanel.changeEmployeeAddJLabel();
         modifyPanel.setAddVisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        //modifyPanel.setUpdateInvisibleForEmployee();
         modifyPanel.setAddInvisible();
-        modifyPanel.setDeleteInvisible();
-        //modifyPanel.setUpdateInvisible();
-        
+        modifyPanel.setDeleteInvisible();        
     }
     public void UButtonInvisible(){
         modifyPanel.setUpdateButtonsInvisible();
@@ -426,20 +382,16 @@ public void setOrderInvisible(){
     public void deleteOptionsForCustomer(){
         modifyPanel.setDeleteVisible();
         modifyPanel.changeCustomerDeleteJLabel();
-        //modifyPanel.setUpdateInvisible();
         modifyPanel.setAddInvisible();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        //modifyPanel.setUpdateInvisibleForEmployee();
     }
     
     public void deleteOptionsForEmployee(){
         modifyPanel.setAddInvisible();
-        //modifyPanel.setUpdateInvisible();
         modifyPanel.changeEmployeeDeleteJLabel();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisible();
-        //modifyPanel.setUpdateInvisibleForEmployee();
         modifyPanel.setDeleteVisibleForEmployee();
     }
         
@@ -449,23 +401,17 @@ public void setOrderInvisible(){
     }
     
     public void updateOptionsForCustomer(){
-        //modifyPanel.setUpdateVisible();
-        //modifyPanel.changeCustomerUpdateJLabel();
         modifyPanel.setAddInvisible();
         modifyPanel.setDeleteInvisible();
         modifyPanel.setAddInvisibleForEmployee();
         modifyPanel.setDeleteInvisibleForEmployee();
-        //modifyPanel.setUpdateInvisibleForEmployee();
     }
     
     public void updateOptionsForEmployee(){
         modifyPanel.setAddInvisible();
         modifyPanel.setDeleteInvisible();
-        //modifyPanel.setUpdateInvisible();
-        //modifyPanel.changeEmployeeUpdateJLabel();
         modifyPanel.setDeleteInvisibleForEmployee();
         modifyPanel.setAddInvisibleForEmployee();
-        //modifyPanel.setUpdateVisible();
     }
     
    public String TextFieldToFile(){
@@ -507,9 +453,5 @@ public void setOrderInvisible(){
     
     public void dontShowForProduct(){
         modifyPanel.dontShowButtonForProduct();
-    }
-    
-    public void initializeLabels(int p,int d,int r){
-        salesReportPanel.initializeLabels(p,d,r);
     }
 }

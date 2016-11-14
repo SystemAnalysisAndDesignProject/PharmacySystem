@@ -26,8 +26,6 @@ public class LoginPanel extends JPanel{
     public Color color;
     public ImageIcon img;
     public JLabel logo;
-    //private final int WIDTH = 800;
-    //private final int HEIGHT = 600; 
     
     public LoginPanel()
     {        
@@ -84,15 +82,12 @@ public class LoginPanel extends JPanel{
     
     public void displayErrorMessage(String errorMessage){
         JOptionPane.showMessageDialog(this, errorMessage);
-    }
-    
-    
-    
+    }   
+      
     public void clearPanel()
     {
         usernameTxt.setText("");        
-        passwordTxt.setText("");
-    
+        passwordTxt.setText("");    
     }
     
     public JLabel getClockLabel()

@@ -153,8 +153,6 @@ public class OrderPanel extends JPanel {
         this.add(add);
         this.add(delete);
         this.add(logo);
-
-        /////////////////////////////
     }
 
     public ArrayList<String> cartDetails() {
@@ -206,7 +204,6 @@ public class OrderPanel extends JPanel {
         for (Iterator it = prescriptionList.getSelectedValuesList().iterator(); it.hasNext();) {
 
             String sel = (String) it.next();
-            // String sel1 = (String) it1.next();
             if (dlm.contains(sel)) {
             } else {
                 if(!items.contains(sel)){
@@ -247,7 +244,6 @@ public class OrderPanel extends JPanel {
         System.out.println("adding to list");
         String name = "";
         addCart(items);
-        //System.out.println(presc.size());
         System.out.println("A");
         for (int i = 0; i < presc.size(); i++) {
             name = presc.get(i).getName();
@@ -336,9 +332,9 @@ public class OrderPanel extends JPanel {
         }
         String item=""; 
         for(int i = 0; i < items.size(); i++){
-            item += "\n" + items.get(i);
+            item += items.get(i) + "\n";
         }
-        JOptionPane.showMessageDialog(null,"Customer Name : " + cusname + "\n\n" + "Products" + item + "\n\n" +  "Price : " 
+        JOptionPane.showMessageDialog(null,"Customer Name : " + cusname + "\n" + "Products : " + item + "\n" + "Price : " 
                 + finalPrice + "\n" + "Payed by : " + payment,"Receipt",1 );
     }
     public void setOrderInvisible(){

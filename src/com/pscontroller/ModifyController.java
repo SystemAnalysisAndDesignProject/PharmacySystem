@@ -20,7 +20,6 @@ public class ModifyController {
         }
              
         this.modifyView.addCustomerListener(new CustomerListener());
-        //this.modifyView.addManagerListener(new ManagerListener());
         this.modifyView.addEmployeeListener(new EmployeeListener());
         this.modifyView.addProductListener(new ProductListener());
         this.modifyView.addBackToMenuListener(new BackToMainMenuListener());       
@@ -164,7 +163,6 @@ public class ModifyController {
     class BackToMainMenuListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
-            System.out.println("back to main menu clicked");
             if(modifyModel.getUser().getRole().equals("M")){
                 modifyView.displayMainMenuManagerFromModify();
             }else{

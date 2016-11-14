@@ -17,18 +17,13 @@ public class SalesReportController {
         
         this.salesReportModel.initializeSubjectsAndObservers();
         this.salesReportView.displaySalesReport();
-        this.salesReportView.initializeLabels(salesReportModel.getMedicalCardSales(),salesReportModel.getDrugSchemeSales(),salesReportModel.getRegularSales());
-  
-        //this.salesReportView.initializeCharts();
-        this.salesReportView.addBackToMainMenuFromSalesReportsListener(new BackToMainMenuListener());
-        
+        this.salesReportView.addBackToMainMenuFromSalesReportsListener(new BackToMainMenuListener());      
         
     }
     
     class BackToMainMenuListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            System.out.println("back to main menu clicked");
                 salesReportView.displayMainMenuManagerFromSalesReports();  
         }             
     }

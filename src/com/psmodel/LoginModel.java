@@ -15,7 +15,6 @@ public class LoginModel {
     }
     
     public boolean Validate(String username, String password){
-        System.out.println("Validating");        
         ArrayList<User> userList = dbm.getUsers();
         
         for(User user : userList)

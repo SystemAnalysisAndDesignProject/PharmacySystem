@@ -1,7 +1,5 @@
 package com.psmodel.customer;
 
-import com.psmodel.perscription.Prescription;
-
 public class Customer implements ICustomer {
     private int customerID;
     private String customerName;

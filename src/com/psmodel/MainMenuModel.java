@@ -2,10 +2,6 @@ package com.psmodel;
 
 import com.psmodel.user.User;
 import com.psdb.DataBaseManagment;
-import com.psmodel.sales.SalesBarChart;
-import com.psmodel.sales.SalesChart;
-import com.psmodel.sales.SalesDetails;
-import com.psmodel.sales.SalesPieChart;
 
 public class MainMenuModel {
     
@@ -15,10 +11,6 @@ public class MainMenuModel {
     public MainMenuModel(DataBaseManagment dbm, User user){
         this.dbm = dbm;
         this.user = user;
-    }
-    
-    public void displayModifyView(){
-        
     }
     
     public User getUser(){

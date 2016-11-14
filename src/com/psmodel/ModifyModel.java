@@ -64,7 +64,6 @@ public class ModifyModel {
       
     public void deleteFromDataBaseForCustomers(String data) {
         try {
-            System.out.println(data);
             dbm.deleteCustomerEntry(data);            
         } catch (IOException ex) {
             Logger.getLogger(ModifyModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,8 +133,7 @@ public class ModifyModel {
                 drugsArray[i][1] = tempdrug.getName();
                 drugsArray[i][2] = tempdrug.getQuantity();
                 drugsArray[i][3] = tempdrug.getPrice(); 
-                System.out.println(drugsArray[i][0] + " " + drugsArray[i][1] + " " + drugsArray[i][2] + " " + drugsArray[i][3]);   
-                
+                              
             } 
         return drugsArray;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pscontroller;
 
 import com.psdb.DataBaseManagment;
@@ -22,14 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Pascal
- */
+
 public class OrderController {
     private PharmacyView pharmacy;
     private OrderModel order;
-    private Prescription prescription;//
+    private Prescription prescription;
     private OrderPanel  orderPanel;
     private DataBaseManagment dbms;
     private ArrayList <Drug> drugs;
@@ -61,14 +53,11 @@ public class OrderController {
     public void actionPerformed(ActionEvent e){
        
        String scheme = order.getScheme();
-       System.out.println("!" + scheme + "!!!!!!!!!!!!!!!!!!!!!!!!111");
        double price, price1;
         ArrayList<String> items;
            items = pharmacy.getCartDetails();
        price = order.getCost(items);
             price1 = order.getFinalPrice(price,scheme);
-            System.out.println("Price before scheme " + price);
-            System.out.println("Final price " + price1);
             String cname = pharmacy.getCustomerName();
             order.updateSales(scheme);
             if(price1 == 0){
@@ -89,7 +78,6 @@ public class OrderController {
     public void actionPerformed(ActionEvent e){
        
        if(!pharmacy.checkForSelection()){
-                System.out.println("printing reciept");
        String scheme = order.getScheme();
   
        
@@ -143,8 +131,6 @@ public class OrderController {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            
-                System.out.println("printing reciept");
        String scheme = order.getScheme();
             
 
@@ -212,12 +198,9 @@ public class OrderController {
                
             }
         }
-         System.out.println("test");
         drugs = order.getDataBase().getDrugs();
         System.out.println(order.getDataBase().getDrugs().size());
-        System.out.println("test 1");
 
-        System.out.println("size drugs " + drugs.size());
         presc = new ArrayList<Drug>();
         nonpresc = new ArrayList<Drug>();
          for(int j = 0; j < drugs.size(); j++){
@@ -229,13 +212,10 @@ public class OrderController {
                  nonpresc.add(drugs.get(j));
              }
          }
-        System.out.println(" prescription " + presc.size());
-        System.out.println("Non prescription " + nonpresc.size());
         pharmacy.populateList(presc,nonpresc,items);
       
          
          if(found){
-          System.out.println("found a prescription with that name");
           pharmacy.setVisibilityOrder();
           pharmacy.addCart(items);
           ArrayList<String> items1 = new ArrayList<>();
@@ -246,9 +226,6 @@ public class OrderController {
           pharmacy.setPrice(price);
           order.setScheme(medical,drug);
         }
-         else{
-             System.out.println("No prescription found");
-            }
         }
         
     }
@@ -257,7 +234,6 @@ public class OrderController {
         @Override
         public void actionPerformed(ActionEvent e){
             
-            System.out.println("back to main menu clicked");
             if(order.getUser().getRole().equals("M")){
                 pharmacy.displayMainMenuManagerFromOrder();
             }else{

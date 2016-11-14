@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.psmodel;
 
 import com.psdb.DataBaseManagment;
@@ -104,7 +99,6 @@ public class OrderModel {
        else if(scheme.equalsIgnoreCase("drug")){
           Cart carts = new CartDecorator( new WithDrugScheme(cart));
             prices = carts.getCost();
-            System.out.println(prices);
             return prices;
        }
        else{
@@ -130,7 +124,6 @@ public class OrderModel {
    public void updateSales(String scheme){
        scheme = getScheme();
        int [] num = dbm.getSalesDetailsArray();
-       System.out.println(num[0] + " " + num[1] + " " + num[2] );
        scheme = scheme.trim();
        if(scheme.equalsIgnoreCase("medical")){
            num[0]++;
