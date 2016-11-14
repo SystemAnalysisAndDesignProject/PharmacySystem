@@ -199,12 +199,10 @@ public class OrderController {
             }
         }
         drugs = order.getDataBase().getDrugs();
-        System.out.println(order.getDataBase().getDrugs().size());
 
         presc = new ArrayList<Drug>();
         nonpresc = new ArrayList<Drug>();
          for(int j = 0; j < drugs.size(); j++){
-             System.out.println(drugs.get(j).getName()  +  " " + drugs.get(j).checkRequiresPerscription());
              if(drugs.get(j).checkRequiresPerscription()== true) {
                  presc.add(drugs.get(j));
              }

@@ -30,7 +30,6 @@ public class SalesBarChart implements IObserver
      latestMedicalCardSales = value;
      latestDrugSchemeSales = value2;
      latestRegularSales = value3;
-     System.out.println(value + " " + value2 + " " + value3);
         try {
             createBarChartImage(latestMedicalCardSales, latestDrugSchemeSales, latestRegularSales);
         } catch (IOException ex) {

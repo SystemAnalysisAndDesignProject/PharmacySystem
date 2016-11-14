@@ -1,4 +1,3 @@
-
 package com.psmodel.product;
 
 public class Panadol extends Drug{

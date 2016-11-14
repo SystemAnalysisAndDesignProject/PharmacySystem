@@ -65,14 +65,8 @@ public class PharmacyView extends JFrame {
     }  
     
     public void displayOrderPanel(){
-            System.out.println("dop");
-
         order = new OrderPanel();
-            System.out.println("op init");
-
         this.add(order);
-            System.out.println("op added");
-
         mainMenuPanel.setVisible(false);
        this.setVisible(true);
     }

@@ -116,7 +116,6 @@ public class ModifyController {
             if(modifyView.TextFieldToFile().split(",").length == 7 && !modifyView.TextFieldToFile().isEmpty()){
                 modifyModel.customerWriteIntoDataBase(modifyView.TextFieldToFile());
                 modifyView.displayTable(modifyModel.getCustomersColumns(), modifyModel.generateArrayForCustomers(modifyModel.getCustomers()));
-                System.out.println(modifyModel.getCustomers().size());
             }else{
                 modifyView.displayErrorMessage("Wrong Format");
             }

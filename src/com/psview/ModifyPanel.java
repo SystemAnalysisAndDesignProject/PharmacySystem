@@ -212,7 +212,6 @@ public class ModifyPanel extends JPanel{
     
     public String deleteEmployeeTextFieldFromFile(){
         String deleteTextFieldForEmployees = employeeDeleteTextField.getText();
-        System.out.println(employeeDeleteTextField);
         return deleteTextFieldForEmployees;
     }
  

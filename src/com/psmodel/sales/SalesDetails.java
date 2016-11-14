@@ -1,6 +1,4 @@
 package com.psmodel.sales;
-
-import com.psdb.DataBaseManagment;
 import java.util.ArrayList;
 
 public class SalesDetails implements ISubject

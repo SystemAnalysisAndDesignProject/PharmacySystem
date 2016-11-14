@@ -169,7 +169,6 @@ public class OrderPanel extends JPanel {
     }
 
     public void deleteFromCart() {
-        System.out.println("deleting from cart");
         cart.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         int selectedIndex = cart.getSelectedIndex();
@@ -186,8 +185,6 @@ public class OrderPanel extends JPanel {
     }
 
     public void addCart(String[] items) {
-        System.out.println("Adding presc to cart");
-
         for (int i = 0; i < items.length; i++) {
             if (!dlm.contains(items[i]) && model.contains(items[i])) {
                 dlm.addElement(items[i]);
@@ -196,10 +193,8 @@ public class OrderPanel extends JPanel {
     }
 
     public void addItemsToCart(String items) {
-        System.out.println("adding to cart");
         prescriptionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         nonPre.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        System.out.println("test 1");
 
         for (Iterator it = prescriptionList.getSelectedValuesList().iterator(); it.hasNext();) {
 
@@ -240,18 +235,13 @@ public class OrderPanel extends JPanel {
     }
 
     public void populateLists(ArrayList<Drug> presc, ArrayList<Drug> nonpresc, String[] items) {
-
-        System.out.println("adding to list");
         String name = "";
         addCart(items);
-        System.out.println("A");
         for (int i = 0; i < presc.size(); i++) {
             name = presc.get(i).getName();
-            System.out.println("B");
             if (model.contains(name)) {
 
             } else {
-                System.out.println(name);
                 model.addElement(name);
             }
         }
@@ -260,7 +250,6 @@ public class OrderPanel extends JPanel {
             if (model1.contains(name)) {
 
             } else {
-                System.out.println(name);
                 model1.addElement(name);
             }
         }

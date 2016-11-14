@@ -19,7 +19,6 @@ public class Clock implements Runnable {
                 clockLabel.setText(getTime());
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                System.out.println(ex);
             }
         }
     }
