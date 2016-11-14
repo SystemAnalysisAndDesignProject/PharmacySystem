@@ -18,7 +18,6 @@ public class MainMenuController {
     
     private PharmacyView mainMenuView;
     private MainMenuModel mainMenuModel;
-    private Prescription prescription;
     
     
     public MainMenuController(PharmacyView mainMenuView, MainMenuModel mainMenuModel){
@@ -51,10 +50,7 @@ public class MainMenuController {
         public void actionPerformed(ActionEvent e) {
             System.out.println("order process clicked");
             OrderModel orderModel = new OrderModel(mainMenuModel.getDataBase(),mainMenuModel.getUser());
-            OrderController control = new OrderController(mainMenuView, orderModel);
-            //mainMenuView.displayOrderPanel();
-          // ModifyController control = new ModifyController(mainMenuView, model);
-            
+            OrderController control = new OrderController(mainMenuView, orderModel);            
         }        
     } 
     

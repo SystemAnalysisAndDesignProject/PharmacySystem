@@ -187,7 +187,7 @@ public class PharmacyView extends JFrame {
        mainMenuPanel.setVisible(true);
        mainMenuPanel.setBackground(employeeColor);
        mainMenuPanel.setWelcomeLbl("Welcome Employee");
-       mainMenuPanel.setButtonsPosition();
+      // mainMenuPanel.setButtonsPosition();
     }
         
     
@@ -253,9 +253,9 @@ public void setOrderInvisible(){
         modifyPanel.addCustomerListener(listenerForCustomerBtn);
     }
     
-    public void addManagerListener(ActionListener listenerForManagerBtn){
-        modifyPanel.addManagerListener(listenerForManagerBtn);
-    }
+    //public void addManagerListener(ActionListener listenerForManagerBtn){
+    //    modifyPanel.addManagerListener(listenerForManagerBtn);
+    //}
     
     public void addEmployeeListener(ActionListener listenerForEmployeeBtn){
         modifyPanel.addEmployeeListener(listenerForEmployeeBtn);

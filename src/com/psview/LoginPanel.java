@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginPanel extends JPanel{
@@ -19,7 +20,7 @@ public class LoginPanel extends JPanel{
     private JLabel usernameLbl;
     private JLabel passwordLbl;
     private JTextField usernameTxt;
-    private JTextField passwordTxt;
+    private JPasswordField passwordTxt;
     private JButton loginBtn;
     public JLabel clockLabel;
     public Color color;
@@ -35,7 +36,7 @@ public class LoginPanel extends JPanel{
         usernameLbl = new JLabel("Username");
         passwordLbl = new JLabel("Password");
         usernameTxt = new JTextField(20);
-        passwordTxt = new JTextField(20);
+        passwordTxt = new JPasswordField(20);
         loginBtn = new JButton("Login");
         clockLabel = new JLabel();
         img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);

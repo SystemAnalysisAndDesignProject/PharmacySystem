@@ -13,7 +13,7 @@ import javax.swing.JTable;
 public class ModifyPanel extends JPanel{
     
     private JButton customerBtn;
-    private JButton managerBtn;
+    //private JButton managerBtn;
     private JButton employeeBtn;
     private JButton productBtn;
     private JButton addButton;
@@ -42,7 +42,7 @@ public class ModifyPanel extends JPanel{
         this.setLayout(null);        
         //Initializing
         customerBtn = new JButton("Customer");
-        managerBtn = new JButton("Manager");
+       // managerBtn = new JButton("Manager");
         employeeBtn = new JButton("Employee");
         productBtn = new JButton("Product");
         backToMenuBtn = new JButton("Back To Main Menu");
@@ -68,10 +68,10 @@ public class ModifyPanel extends JPanel{
         //employeeUpdateTextField = new JTextField("");   
         
         //Setting Position      
-        customerBtn.setBounds(30, 20, 150, 20);
-        managerBtn.setBounds(210, 20, 150, 20);
-        employeeBtn.setBounds(390, 20, 150, 20);
-        productBtn.setBounds(570, 20, 150, 20);
+        customerBtn.setBounds(120, 20, 150, 20);
+        //managerBtn.setBounds(210, 20, 150, 20);
+        employeeBtn.setBounds(320, 20, 150, 20);
+        productBtn.setBounds(520, 20, 150, 20);
         backToMenuBtn.setBounds(510, 500, 150, 20);
         scrollPane.setBounds(10, 250, 200, 300);
         addButton.setBounds(30, 100, 150, 20);
@@ -90,7 +90,7 @@ public class ModifyPanel extends JPanel{
         logo.setBounds(20,450,100,100); 
         //Adding to components to Panel
         this.add(customerBtn);
-        this.add(managerBtn);
+        //this.add(managerBtn);
         this.add(employeeBtn);
         this.add(productBtn);
         this.add(backToMenuBtn);      
@@ -129,13 +129,12 @@ public class ModifyPanel extends JPanel{
     }
     
     public void setVisibilityForEmployee(){
-        managerBtn.setVisible(false);
+        //managerBtn.setVisible(false);
         employeeBtn.setVisible(false);
         productBtn.setVisible(false);        
     }   
 
     public void displayTable(String [] columns,Object[][] drugs){
-        System.out.println("hello");
         dontDisplayTable();
         table = new JTable(drugs,columns);
         table.setEnabled(false);
@@ -280,7 +279,7 @@ public class ModifyPanel extends JPanel{
     }
  
     public void changeEmployeeAddJLabel(){
-        addInfoLabel.setText("Enter the employees details. e.g. emp,emp1,E,false,true,false");
+        addInfoLabel.setText("Enter the employees details. e.g. emp,emp1,E,false,true,false,false");
     }
     
     public void changeEmployeeDeleteJLabel(){
@@ -341,9 +340,9 @@ public class ModifyPanel extends JPanel{
         customerBtn.addActionListener(listenerForCustomerBtn);
     }
     
-    public void addManagerListener(ActionListener listenerForManagerBtn){
-        managerBtn.addActionListener(listenerForManagerBtn);
-    }
+    //public void addManagerListener(ActionListener listenerForManagerBtn){
+   //     managerBtn.addActionListener(listenerForManagerBtn);
+    //}
     
     public void addEmployeeListener(ActionListener listenerForEmployeeBtn){
         employeeBtn.addActionListener(listenerForEmployeeBtn);

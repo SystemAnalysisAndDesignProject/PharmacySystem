@@ -20,7 +20,7 @@ public class ModifyController {
         }
              
         this.modifyView.addCustomerListener(new CustomerListener());
-        this.modifyView.addManagerListener(new ManagerListener());
+        //this.modifyView.addManagerListener(new ManagerListener());
         this.modifyView.addEmployeeListener(new EmployeeListener());
         this.modifyView.addProductListener(new ProductListener());
         this.modifyView.addBackToMenuListener(new BackToMainMenuListener());       
@@ -128,8 +128,12 @@ public class ModifyController {
     class deleteTextField implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){ 
+            if(!modifyView.customerDeleteTextFieldToFile().isEmpty()){
              modifyModel.deleteFromDataBaseForCustomers(modifyView.customerDeleteTextFieldToFile());
              modifyView.displayTable(modifyModel.getCustomersColumns(), modifyModel.generateArrayForCustomers(modifyModel.getCustomers()));
+            }else{
+                 modifyView.displayErrorMessage("Wrong Input");
+            }
         }
     }
    
@@ -148,7 +152,7 @@ public class ModifyController {
     class employeeDeleteTextField implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(modifyView.employeeDeleteTextFieldToFile().length() != 0){
+            if(!modifyView.employeeDeleteTextFieldToFile().isEmpty()){
                 modifyModel.deleteFromDataBaseForEmployees(modifyView.employeeDeleteTextFieldToFile());
                 modifyView.displayTable(modifyModel.getUsersColumns(), modifyModel.generateArrayForEmployees(modifyModel.getUsers()));
             }else{

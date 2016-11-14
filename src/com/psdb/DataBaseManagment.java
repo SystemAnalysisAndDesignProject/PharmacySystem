@@ -274,33 +274,43 @@ public class DataBaseManagment {
         //tring input = modifyPanel.deleteCustomerTextFieldFromFile();
         //System.out.println(input);
         FileWriter newCustomerFile = new FileWriter(PharmacyConstants.customersFilePath);
-        int deleteCustomer = Integer.parseInt(data) -1;
-        System.out.println(deleteCustomer);
-        customers.remove(deleteCustomer);
+        try{    
+            if(!data.equals("")){
+                
+            int deleteCustomer = Integer.parseInt(data) -1;
+            
+            System.out.println(deleteCustomer + "costam");
+            customers.remove(deleteCustomer);
         
-        for(int a = 0; a < customers.size(); a++)
-        {
-            newCustomerFile.write(customers.get(a).getCustomerID() + "," +
+            for(int a = 0; a < customers.size(); a++)
+            {
+                    newCustomerFile.write(customers.get(a).getCustomerID() + "," +
                     customers.get(a).getCustomerName() + "," +
                     customers.get(a).getDateOfBirth() + "," +
                     customers.get(a).getAddress() + "," + 
                     customers.get(a).getContactNumber() + "," +
                     customers.get(a).getMedical() + "," +
                     customers.get(a).getDrug() + System.lineSeparator());
-        }
-        newCustomerFile.close();        
+            }
+            newCustomerFile.close(); 
+            }            
+        }catch(NumberFormatException e){
+            
+        }catch(NullPointerException e){
+            
+        }             
     }
     
     public void deleteEmployeeEntry(String employee) throws IOException{
-        //String deleteRow = modifyPanel.deleteEmployeeTextFieldFromFile();
         FileWriter fWriter = new FileWriter(PharmacyConstants.usersFilePath); 
-        int input = Integer.parseInt(employee) -1;
-        users.remove(input);
-        
-        
-        
-        for(int i = 0; i < users.size(); i++)
-        {
+        try{   
+            if(!employee.equals("")){
+             int input = Integer.parseInt(employee)-1;
+             
+                  users.remove(input);     
+  
+            for(int i = 0; i < users.size(); i++)
+            {
                     fWriter.write(users.get(i).getUsername() + "," +
                     users.get(i).getPassword() + "," +
                     users.get(i).getRole() + "," +
@@ -309,10 +319,15 @@ public class DataBaseManagment {
                     users.get(i).getPermission().getCanModifyProducts() + "," +
                     users.get(i).getPermission().getCanModifyProducts() + System.lineSeparator());
         
+            }
+            fWriter.close();
+             }            
+        }catch(NumberFormatException e){
+            
+        }catch(NullPointerException e){
+            
+        }
     }
-        fWriter.close();
-    }
-        ///////////////////////////
     
     public ArrayList<User> getUsers(){  
         readUsers();
