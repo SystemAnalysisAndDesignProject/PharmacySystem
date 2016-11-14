@@ -69,6 +69,7 @@ public class MainMenuController {
            SalesReportModel salesReportModel = new SalesReportModel(mainMenuModel.getDataBase());                    
             try {
                 SalesReportController salesReportController = new SalesReportController(mainMenuView,salesReportModel);
+                
             } catch (IOException ex) {
                 Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -20,14 +20,19 @@ public class SalesReportPanel extends JPanel{
     {
         this.setLayout(null);        
         //Initializing
+       // initializeImages();
         pieImage = new ImageIcon(PharmacyConstants.pieChartFilePath);
+        pieImage.getImage().flush();
         pieLabel = new JLabel(pieImage);
         barImage = new ImageIcon(PharmacyConstants.barChartFilePath);
+         barImage.getImage().flush();
         barLabel = new JLabel(barImage);   
         backToMainMenuBtn = new JButton("Back to Main Menu");
         img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
         logo = new JLabel();
         logo.setIcon(img);
+       //new create
+        
         
       
         //Setting Position      
@@ -42,6 +47,22 @@ public class SalesReportPanel extends JPanel{
         this.add(backToMainMenuBtn);
         this.add(logo);
     }
+
+    /*
+    public void initializeImages(){
+        barLabel = new JLabel();
+        pieLabel = new JLabel();
+        barLabel.setIcon(null);
+        pieLabel.setIcon(null);
+        pieLabel.revalidate();
+        barLabel.revalidate();
+         pieImage = new ImageIcon(PharmacyConstants.pieChartFilePath);
+         barImage = new ImageIcon(PharmacyConstants.barChartFilePath);
+         barLabel.setIcon(barImage);
+         pieLabel.setIcon(pieImage);
+         barLabel.repaint();
+         pieLabel.repaint();
+    }*/
     public void addBackToMainMenuListener(ActionListener listenerForBackToMainMenuBtn){
         backToMainMenuBtn.addActionListener(listenerForBackToMainMenuBtn);
     }

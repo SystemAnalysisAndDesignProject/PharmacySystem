@@ -142,5 +142,6 @@ public class OrderModel {
            num[2]++;
         }
        dbm.updateSales(num);
+       
    }
 }  

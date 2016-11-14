@@ -14,11 +14,13 @@ public class SalesReportController {
     {
         this.salesReportView = salesReportView;
         this.salesReportModel = salesReportModel;
-     
-        salesReportView.displaySalesReport();
-        salesReportModel.initializeSubjectsAndObservers();
         
+        this.salesReportModel.initializeSubjectsAndObservers();
+        this.salesReportView.displaySalesReport();
+  
+        //this.salesReportView.initializeCharts();
         this.salesReportView.addBackToMainMenuFromSalesReportsListener(new BackToMainMenuListener());
+        
         
     }
     

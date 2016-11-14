@@ -16,9 +16,8 @@ public class SalesReportModel {
     }
     
     public void initializeSubjectsAndObservers(){
-        
+        System.out.println("initializin observer");
         int [] salesDetailsArray = dbm.getSalesDetailsArray();
-        
         //Initialize Subject
         SalesDetails salesDetails =  new SalesDetails();
         int medicalCardSales = salesDetailsArray[0];

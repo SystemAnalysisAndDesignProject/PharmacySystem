@@ -343,6 +343,7 @@ public class DataBaseManagment {
     }
     
     public int [] getSalesDetailsArray(){
+        readSalesDetails();
         return salesDetailsArray;
     }
     
