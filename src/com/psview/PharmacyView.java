@@ -508,8 +508,8 @@ public void setOrderInvisible(){
     public void dontShowForProduct(){
         modifyPanel.dontShowButtonForProduct();
     }
-    /*
-    public void initializeCharts(){
-        salesReportPanel.initializeImages();
-    }*/
+    
+    public void initializeLabels(int p,int d,int r){
+        salesReportPanel.initializeLabels(p,d,r);
+    }
 }

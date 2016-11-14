@@ -15,6 +15,9 @@ public class SalesReportPanel extends JPanel{
     private JButton backToMainMenuBtn;
     private ImageIcon img;
     private JLabel logo;
+    private JLabel prescriptionLbl;
+    private JLabel drugSchemeLbl;
+    private JLabel regularSalesLbl;
     
     public SalesReportPanel()
     {
@@ -31,6 +34,10 @@ public class SalesReportPanel extends JPanel{
         img = new ImageIcon(PharmacyConstants.pharmacyIconFilePath);
         logo = new JLabel();
         logo.setIcon(img);
+        prescriptionLbl = new JLabel();
+        drugSchemeLbl = new JLabel();
+        regularSalesLbl = new JLabel();
+        
        //new create
         
         
@@ -40,29 +47,29 @@ public class SalesReportPanel extends JPanel{
         barLabel.setBounds(410, 50, 352, 264);
         backToMainMenuBtn.setBounds(600,500,150,20);
         logo.setBounds(20,450,100,100);
+        prescriptionLbl.setBounds(320,364,150,20);
+        
+        drugSchemeLbl.setBounds(320,414,150,20);
+        
+        regularSalesLbl.setBounds(320,464,150,20);
         
         //Adding to components to Panel
         this.add(pieLabel);
         this.add(barLabel);
         this.add(backToMainMenuBtn);
         this.add(logo);
+        this.add(prescriptionLbl);        
+        this.add(drugSchemeLbl);
+        this.add(regularSalesLbl);
     }
 
-    /*
-    public void initializeImages(){
-        barLabel = new JLabel();
-        pieLabel = new JLabel();
-        barLabel.setIcon(null);
-        pieLabel.setIcon(null);
-        pieLabel.revalidate();
-        barLabel.revalidate();
-         pieImage = new ImageIcon(PharmacyConstants.pieChartFilePath);
-         barImage = new ImageIcon(PharmacyConstants.barChartFilePath);
-         barLabel.setIcon(barImage);
-         pieLabel.setIcon(pieImage);
-         barLabel.repaint();
-         pieLabel.repaint();
-    }*/
+    public void initializeLabels(int p,int d,int r){
+        prescriptionLbl.setText("Medical Card: " + p);
+        drugSchemeLbl.setText("Drug Scheme: " + d);
+        regularSalesLbl.setText("Regular Sales: " + r);
+        
+    }
+    
     public void addBackToMainMenuListener(ActionListener listenerForBackToMainMenuBtn){
         backToMainMenuBtn.addActionListener(listenerForBackToMainMenuBtn);
     }

@@ -39,7 +39,7 @@ public class SalesPieChart implements IObserver
     public void createPieChartImage(int x, int y, int z) throws IOException
     {
       DefaultPieDataset dataset = new DefaultPieDataset( );
-      dataset.setValue("Sales involving Perscription", new Double( x ) );
+      dataset.setValue("Sales involving Medical Card", new Double( x ) );
       dataset.setValue("Sales involving Drug Scheme", new Double( y ) );
       dataset.setValue("Reglar Sales", new Double( z ) );
 
