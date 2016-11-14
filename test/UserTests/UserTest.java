@@ -85,4 +85,18 @@ public class UserTest {
        Assert.assertEquals(canModifyManager,user.getPermission().getCanModifyManager());
        
     }
+    
+    @Test
+    public void singleton(){
+        Admin admin = Admin.getInstance();
+        Assert.assertTrue(admin instanceof Admin);
+    }
+    
+    @Test
+    public void comparingSingletons(){
+        Admin admin = Admin.getInstance();
+        Assert.assertTrue(admin instanceof Admin);
+        Admin admin1 = Admin.getInstance();
+        Assert.assertEquals(admin, admin1);
+    }
 }
