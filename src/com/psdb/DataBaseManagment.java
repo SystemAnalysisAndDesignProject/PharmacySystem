@@ -274,9 +274,7 @@ public class DataBaseManagment {
         //tring input = modifyPanel.deleteCustomerTextFieldFromFile();
         //System.out.println(input);
         FileWriter newCustomerFile = new FileWriter(PharmacyConstants.customersFilePath);
-        try{    
-            if(!data.equals("")){
-                
+        try{        
             int deleteCustomer = Integer.parseInt(data) -1;
             
             System.out.println(deleteCustomer + "costam");
@@ -293,7 +291,7 @@ public class DataBaseManagment {
                     customers.get(a).getDrug() + System.lineSeparator());
             }
             newCustomerFile.close(); 
-            }            
+                       
         }catch(NumberFormatException e){
             
         }catch(NullPointerException e){

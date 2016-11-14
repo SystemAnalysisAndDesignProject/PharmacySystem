@@ -114,7 +114,7 @@ public class ModifyController {
     class addTextField implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(modifyView.TextFieldToFile().split(",").length == 7){
+            if(modifyView.TextFieldToFile().split(",").length == 7 && !modifyView.TextFieldToFile().isEmpty()){
                 modifyModel.customerWriteIntoDataBase(modifyView.TextFieldToFile());
                 modifyView.displayTable(modifyModel.getCustomersColumns(), modifyModel.generateArrayForCustomers(modifyModel.getCustomers()));
                 System.out.println(modifyModel.getCustomers().size());
@@ -128,7 +128,7 @@ public class ModifyController {
     class deleteTextField implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){ 
-            if(!modifyView.customerDeleteTextFieldToFile().isEmpty()){
+            if(!modifyView.customerDeleteTextFieldToFile().isEmpty() && modifyView.customerDeleteTextFieldToFile().matches(".*\\d+.*")){
              modifyModel.deleteFromDataBaseForCustomers(modifyView.customerDeleteTextFieldToFile());
              modifyView.displayTable(modifyModel.getCustomersColumns(), modifyModel.generateArrayForCustomers(modifyModel.getCustomers()));
             }else{
@@ -140,7 +140,7 @@ public class ModifyController {
     class employeeAddTextField implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(modifyView.employeeAddTextFieldToFile().split(",").length == 7){
+            if(modifyView.employeeAddTextFieldToFile().split(",").length == 7 && !modifyView.employeeAddTextFieldToFile().isEmpty()){
                 modifyModel.employeeWriteToDataBase(modifyView.employeeAddTextFieldToFile());
                 modifyView.displayTable(modifyModel.getUsersColumns(), modifyModel.generateArrayForEmployees(modifyModel.getUsers()));
             }else{
@@ -152,13 +152,12 @@ public class ModifyController {
     class employeeDeleteTextField implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(!modifyView.employeeDeleteTextFieldToFile().isEmpty()){
+            if(!modifyView.employeeDeleteTextFieldToFile().isEmpty() && modifyView.employeeDeleteTextFieldToFile().matches(".*\\d+.*")){
                 modifyModel.deleteFromDataBaseForEmployees(modifyView.employeeDeleteTextFieldToFile());
                 modifyView.displayTable(modifyModel.getUsersColumns(), modifyModel.generateArrayForEmployees(modifyModel.getUsers()));
             }else{
                 modifyView.displayErrorMessage("Wrong Input");
-            }
-           
+            }           
         }
     }
     
