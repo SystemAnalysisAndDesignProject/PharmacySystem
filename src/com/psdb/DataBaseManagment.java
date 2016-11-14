@@ -16,6 +16,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DataBaseManagment {
     
@@ -128,9 +130,21 @@ public class DataBaseManagment {
             writer.write(line);
             writer.newLine();
         }
-        
-    writer.close();
-}
+        writer.close();
+    }
+    
+    public void updateSales(int [] num){
+        System.out.println("updating sales");
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(PharmacyConstants.salesDetailsFilePath));
+            String line = num[0] + "," + num[1] + "," + num[2];
+            writer.write(line);
+            
+            writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(DataBaseManagment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private void readCustomers(){
         BufferedReader br = null;        
@@ -159,7 +173,7 @@ public class DataBaseManagment {
         }
     }   
     
-    private void readSalesDetails(){ 
+    public void readSalesDetails(){ 
         BufferedReader br = null;        
         SalesDetails salesDetails = new SalesDetails();
         try{
@@ -274,7 +288,7 @@ public class DataBaseManagment {
                     customers.get(a).getMedical() + "," +
                     customers.get(a).getDrug() + System.lineSeparator());
         }
-        newCustomerFile.close();
+        newCustomerFile.close();        
     }
     
     public void deleteEmployeeEntry(String employee) throws IOException{

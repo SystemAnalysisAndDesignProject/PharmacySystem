@@ -61,6 +61,7 @@ public class OrderController {
     public void actionPerformed(ActionEvent e){
        
        String scheme = order.getScheme();
+       System.out.println("!" + scheme + "!!!!!!!!!!!!!!!!!!!!!!!!111");
        double price, price1;
         ArrayList<String> items;
            items = pharmacy.getCartDetails();
@@ -68,21 +69,31 @@ public class OrderController {
             price1 = order.getFinalPrice(price,scheme);
             System.out.println("Price before scheme " + price);
             System.out.println("Final price " + price1);
-            
-            pharmacy.displayCheckout(price,price1);
+            String cname = pharmacy.getCustomerName();
+            order.updateSales(scheme);
+            if(price1 == 0){
+                pharmacy.displayReceipt(cname,items,price1);
+
+                 MainMenuModel model = new MainMenuModel(order.getDataBase(),order.getUser());
+                 MainMenuController control = new MainMenuController(pharmacy,model);
+                 pharmacy.setOrderInvisible();
+            }
+            else{
+                pharmacy.displayCheckout(price,price1);
+            }
     }
     
 }
     class Pay implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
-       // dispay reciept
+       
        if(!pharmacy.checkForSelection()){
                 System.out.println("printing reciept");
        String scheme = order.getScheme();
+  
        
        String cname = pharmacy.getCustomerName();
-       //String paymenttype = payment.get 
        ArrayList<String> items = pharmacy.getCartDetails();
        double price = order.getCost(items);
        double finalPrice = order.getFinalPrice(price,scheme);
@@ -131,8 +142,15 @@ public class OrderController {
     class OrderListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            
+            
+                System.out.println("printing reciept");
+       String scheme = order.getScheme();
+            
 
             String name = e.getActionCommand();
+            
+            
 
          medical = false;
          drug = false;
@@ -214,6 +232,7 @@ public class OrderController {
         System.out.println(" prescription " + presc.size());
         System.out.println("Non prescription " + nonpresc.size());
         pharmacy.populateList(presc,nonpresc,items);
+      
          
          if(found){
           System.out.println("found a prescription with that name");
@@ -231,6 +250,7 @@ public class OrderController {
              System.out.println("No prescription found");
             }
         }
+        
     }
     
     class BackToMenu implements ActionListener{

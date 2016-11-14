@@ -18,10 +18,6 @@ import com.psmodel.user.User;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Pascal
- */
 public class OrderModel {
     private DataBaseManagment dbm;
     private User user;
@@ -30,7 +26,7 @@ public class OrderModel {
     private boolean medical;
     private boolean drug;
     private String prescriptionFor;
-    ////////
+
     public OrderModel(DataBaseManagment dbm, User user) {
         this.dbm = dbm;
         this.user =user;
@@ -64,9 +60,12 @@ public class OrderModel {
      else if(drug == true && medical == false){
          return "drug";
      }
-     else{
-         return "none";
+     else if(medical == true && drug == true){
+         return "medical";
      }
+     else{
+     return "none";
+    }
  }
  public void setPrescriptionFor(String items){
      prescriptionFor = items;
@@ -96,8 +95,7 @@ public class OrderModel {
   
        cart.setCost(price);
        double prices;
-       System.out.println("edeiq " + cart.getCost());
-       //Cart carts;
+       
        if(scheme.equalsIgnoreCase("medical")){
           Cart carts = new WithMedicalCard(new EmptyCart());
             prices = carts.Cost();
@@ -127,5 +125,22 @@ public class OrderModel {
            }
        }
        dbm.updateDrugsFile(drugs);
+   }
+   
+   public void updateSales(String scheme){
+       scheme = getScheme();
+       int [] num = dbm.getSalesDetailsArray();
+       System.out.println(num[0] + " " + num[1] + " " + num[2] );
+       scheme = scheme.trim();
+       if(scheme.equalsIgnoreCase("medical")){
+           num[0]++;
+       }
+       else if(scheme.equalsIgnoreCase("drug")){
+           num[1]++;
+       }
+       else{
+           num[2]++;
+        }
+       dbm.updateSales(num);
    }
 }  

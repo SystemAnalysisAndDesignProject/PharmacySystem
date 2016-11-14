@@ -50,8 +50,8 @@ public class SalesPieChart implements IObserver
          true,
          false);
          
-      int width = 320; //image width
-      int height = 240; //image height
+      int width = 352; //image width
+      int height = 264; //image height
       File pieChart = new File( "PieChart.jpeg" ); 
       ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
     }

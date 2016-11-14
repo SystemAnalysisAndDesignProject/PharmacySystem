@@ -65,7 +65,7 @@ public class ModifyModel {
     public void deleteFromDataBaseForCustomers(String data) {
         try {
             System.out.println(data);
-            dbm.deleteCustomerEntry(data);
+            dbm.deleteCustomerEntry(data);            
         } catch (IOException ex) {
             Logger.getLogger(ModifyModel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,4 +78,67 @@ public class ModifyModel {
             Logger.getLogger(ModifyModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Object[][] generateArrayForCustomers(ArrayList<Customer> customers){
+        
+                Object [][] customerArray = new Object[customers.size()+1] [7];
+                for(int i = 0; i < customers.size();i++){             
+                Customer tempCustomer = customers.get(i);
+                 customerArray[i][0] = tempCustomer.getCustomerID();
+                customerArray[i][1] = tempCustomer.getCustomerName();
+                customerArray[i][2] = tempCustomer.getDateOfBirth();
+                customerArray[i][3] = tempCustomer.getAddress();
+                
+                customerArray[i][4] = tempCustomer.getContactNumber();
+                
+                customerArray[i][5] = tempCustomer.getMedical();
+                customerArray[i][6] = tempCustomer.getDrug();
+                
+            }
+                return customerArray;
+    }
+    
+    public Object[][] generateArrayForEmployees(ArrayList<User> users){
+        int counter = 0;
+        for(int i = 0; i < users.size();i++){             
+                User tempUser = users.get(i);
+                if(tempUser.getRole().toLowerCase().equals("e")){
+                    counter++;
+                }
+             }
+        
+             Object [][] usersArray = new Object[counter+1] [6]; 
+             int j = 0;
+                for(int i = 0; i < usersArray.length;i++){             
+                    User tempUser = users.get(i);
+                
+                    if(tempUser.getRole().toLowerCase().equals("e")){
+                      usersArray[j][0] = tempUser.getUsername();
+                      usersArray[j][1] = tempUser.getPassword();
+                      usersArray[j][2] = tempUser.getRole();
+                      usersArray[j][3] = tempUser.getPermission().getCanModifyCustomer();
+                      usersArray[j][4] = tempUser.getPermission().getCanModifyEmployee();
+                      usersArray[j][5] = tempUser.getPermission().getCanModifyProducts();
+                      j++;
+                }
+                  
+                }
+              return usersArray;  
+    }
+    
+    public Object[][] generateArrayForDrugs(ArrayList<Drug> drugs){
+        Object [][] drugsArray = new Object[drugs.size()+1] [4]; 
+        for(int i = 0; i < drugs.size();i++){             
+                Drug tempdrug = drugs.get(i);
+                 drugsArray[i][0] = tempdrug.getProductID();
+                drugsArray[i][1] = tempdrug.getName();
+                drugsArray[i][2] = tempdrug.getQuantity();
+                drugsArray[i][3] = tempdrug.getPrice(); 
+                System.out.println(drugsArray[i][0] + " " + drugsArray[i][1] + " " + drugsArray[i][2] + " " + drugsArray[i][3]);   
+                
+            } 
+        return drugsArray;
+    }
 }
+       
+    

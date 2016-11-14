@@ -31,8 +31,8 @@ public class SalesReportPanel extends JPanel{
         
       
         //Setting Position      
-        pieLabel.setBounds(50, 50, 320, 240);
-        barLabel.setBounds(400, 50, 320, 240);
+        pieLabel.setBounds(35, 50, 352, 264);
+        barLabel.setBounds(410, 50, 352, 264);
         backToMainMenuBtn.setBounds(600,500,150,20);
         logo.setBounds(20,450,100,100);
         

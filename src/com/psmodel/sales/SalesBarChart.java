@@ -30,6 +30,7 @@ public class SalesBarChart implements IObserver
      latestMedicalCardSales = value;
      latestDrugSchemeSales = value2;
      latestRegularSales = value3;
+     System.out.println(value + " " + value2 + " " + value3);
         try {
             createBarChartImage(latestMedicalCardSales, latestDrugSchemeSales, latestRegularSales);
         } catch (IOException ex) {
@@ -56,8 +57,8 @@ public class SalesBarChart implements IObserver
          dataset,PlotOrientation.VERTICAL, 
          true, true, false);
          
-      int width = 320; /* Width of the image */
-      int height = 240; /* Height of the image */ 
+      int width = 352; /* Width of the image */
+      int height = 264; /* Height of the image */ 
       File BarChart = new File( "BarChart.jpeg" ); 
       ChartUtilities.saveChartAsJPEG( BarChart , barChart , width , height );
     }

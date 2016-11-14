@@ -1,4 +1,3 @@
 master,master1,M,true,true,true,true
-emp,emp1,E,true,false,false,false
-empl,emp3,E,true,false,false,false
 lol,lol1,E,false,false,false,false
+l,l1,E,false,true,true,true

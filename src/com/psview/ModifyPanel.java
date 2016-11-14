@@ -135,10 +135,12 @@ public class ModifyPanel extends JPanel{
     }   
 
     public void displayTable(String [] columns,Object[][] drugs){
+        System.out.println("hello");
+        dontDisplayTable();
         table = new JTable(drugs,columns);
         table.setEnabled(false);
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(30,250,700,100);
+        scrollPane.setBounds(30,250,700,200);
         this.add(scrollPane);
         table.setVisible(true);        
     }   

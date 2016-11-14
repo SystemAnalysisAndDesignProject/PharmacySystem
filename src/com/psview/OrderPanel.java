@@ -320,17 +320,26 @@ public class OrderPanel extends JPanel {
         String x = Double.toString(finalPrice);
         JTextField field = new JTextField(x);
         p1.setText(x);
+        cost.setVisible(false);
+        price.setVisible(false);
 
         payment.setVisible(false);
         p1.setVisible(false);
 
         Object paymenttype = payment.getSelectedValue();
+        String payment;
+        if(paymenttype == null){
+            payment = "Medical Card";
+        }
+        else{
+            payment = paymenttype.toString();
+        }
         String item=""; 
         for(int i = 0; i < items.size(); i++){
             item += items.get(i) + "\n";
         }
         JOptionPane.showMessageDialog(null,"Customer Name : " + cusname + "\n" + "Products : " + item + "\n" + "Price : " 
-                + finalPrice + "\n" + "Payed by : " + paymenttype,"Receipt",1 );
+                + finalPrice + "\n" + "Payed by : " + payment,"Receipt",1 );
     }
     public void setOrderInvisible(){
         this.setVisible(false);
@@ -343,6 +352,10 @@ public class OrderPanel extends JPanel {
     
     public boolean getPayment(){
         return payment.isSelectionEmpty();
+    }
+    
+    public boolean getPayments(){
+        return cart.isSelectionEmpty();
     }
 
     public void addToCartListener(ActionListener listenerForAdd) {

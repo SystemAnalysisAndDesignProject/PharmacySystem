@@ -11,7 +11,8 @@ public class SalesReportModel {
     private final DataBaseManagment dbm;
     
     public SalesReportModel(DataBaseManagment dbm){
-        this.dbm = dbm;       
+        this.dbm = dbm; 
+        dbm.readSalesDetails();
     }
     
     public void initializeSubjectsAndObservers(){
