@@ -22,12 +22,8 @@ public class LoginController {
     class LoginListener implements ActionListener
     {
         @Override
-        public void actionPerformed(ActionEvent e) {
-                String username, password;    
-                
-                username = loginView.getUsername();
-                password = loginView.getPassword();            
-                boolean userExists = loginModel.Validate(username, password);
+        public void actionPerformed(ActionEvent e) {            
+                boolean userExists = loginModel.Validate(loginView.getUsername(), loginView.getPassword());
                 
                 if(!userExists)
                 {
