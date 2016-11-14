@@ -40,7 +40,7 @@ public class SalesBarChart implements IObserver
     public void createBarChartImage(int x, int y, int z) throws IOException
     {
 
-      final String perscription = "Sales involving Perscription";
+      final String perscription = "Sales involving Medical Card";
       final String drugScheme = "Sales involving Drug Scheme";
       final String regular = "Regular Sales";
       final String sales = "Sales";
